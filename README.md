@@ -97,4 +97,4 @@ npx wrangler pages secret put SUPABASE_ANON_KEY --project-name=smart-grocer-beta
 npx wrangler pages secret put RESEND_API_KEY --project-name=smart-grocer-beta
 ```
 
-Privacy draft: `/privacy.html` (also rewritten from `/privacy`). Approve copy before treating it as final.
+Privacy draft: `/privacy` (from `privacy.html`). Approve copy before treating it as final.
