@@ -20,6 +20,7 @@ Smart Grocer beta is a small static waitlist site (Vite builds `index.html` + `p
   [ -n "${RESEND_API_KEY:-}" ] && printf 'RESEND_API_KEY=%s\n' "$RESEND_API_KEY" >> .dev.vars
   ```
   Without `.dev.vars`, the page still loads but `POST /api/waitlist` returns HTTP 500 ("Waitlist is temporarily unavailable."). Do not commit `.dev.vars`.
-- The confirmation email send is best-effort: if Resend fails (e.g. an invalid/placeholder key) the error is caught and the signup still returns `{"ok":true}`. So a successful "You're on the list." only requires a working Supabase insert path.
+- The confirmation email send is best-effort: if Resend fails (e.g. an invalid/placeholder key) the error is caught and the signup still returns `{"ok":true}`. A UI success state alone does not prove Resend delivered.
 - `wrangler dev` requires an existing `dist/` build; `npm run preview` builds first. Editing `src/` after starting requires a rebuild for the Worker to serve new assets.
 - `functions/lib/rate-limit.ts` allows 5 signups per client IP per 10 minutes; repeated local testing from one IP can return HTTP 429.
+- When Cursor secrets are present, validate against the **real** backend (no local REST stub). Copy env → `.dev.vars`, run `npm run preview`, then `POST /api/waitlist` with a unique email. Prove insert with Supabase MCP `execute_sql` on project `hpoqzeddfzwspugjkgjb` table `public.beta_waitlist` (anon cannot SELECT). Prove email with the authenticated Resend MCP (`list-emails` / `get-email`): from `Smart Grocer <hello@smartgrocerapp.com>`, subject `You're on the list`. Repeat signups of the same email return `ok: true` without sending another email.
