@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Smart Grocer">
+  <rect width="512" height="512" fill="#C27351"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round">
+    <path d="M156 198c18-28 54-28 72 0"/>
+    <path d="M284 198c18-28 54-28 72 0"/>
+    <path d="M150 318c42 78 170 78 212 0"/>
+  </g>
+</svg>
