@@ -17,6 +17,8 @@ export function initLogoWells(): void {
       img.dataset.fallback = "png";
       img.src = LOGO_PNG;
     });
-    img.src = LOGO_SVG;
+    if (!img.getAttribute("src")) {
+      img.src = LOGO_SVG;
+    }
   });
 }

@@ -1,35 +1,67 @@
 # Smart Grocer beta site
 
-Public waitlist for the Smart Grocer beta. Conversion goal: collect testers. Canonical URL: https://beta.smartgrocerapp.com
+Public waitlist for the Smart Grocer beta. Conversion goal: collect testers.
 
-Do not attach a custom domain, point DNS, or change Resend MX / SPF / DKIM until a human confirms.
+Canonical URL (once you attach the domain): https://beta.smartgrocerapp.com
 
-## Local
+You can keep editing after it is live. Production is just this GitHub repo on Cloudflare Pages. A change on `main` (or a merged pull request) rebuilds the site. Preview URLs on pull requests let you look before merging.
+
+Do not change Resend MX / SPF / DKIM on `smartgrocerapp.com`. A `beta` CNAME is the only DNS this site needs.
+
+## How to look at it
+
+Until Pages is connected, there is no public URL yet. After you connect the repo (steps below), Cloudflare gives you:
+
+- A preview URL like `https://smart-grocer-beta.pages.dev` (safe to share, not the custom domain)
+- Later: `https://beta.smartgrocerapp.com`
+
+On your laptop:
 
 ```bash
 cp .env.example .env
-# Fill SUPABASE_URL, SUPABASE_ANON_KEY, and RESEND_API_KEY
+# paste the three keys into .env
 npm install
-```
-
-The waitlist API is a Cloudflare Pages Function. It **fails fast** if those three variables are missing.
-
-```bash
-# Visual-only (Vite). The form posts to /api/waitlist, which this server does not provide.
-npm run dev
-
-# Full site + waitlist function (recommended)
 npm run pages:dev
 ```
 
-`npm run pages:dev` builds into `dist/` and serves it with Wrangler. Open the printed localhost URL.
+Open the localhost URL Wrangler prints (usually `http://127.0.0.1:8787`).
 
-Wrangler reads `.env` / `.dev.vars` for local secrets. Do not commit either file.
+## What “Pages secrets” are
 
-```bash
-npm run typecheck
-npm run build
-```
+They are **not** a special Smart Grocer setting. They are three values Cloudflare injects into the waitlist function so keys never go in the website JavaScript.
+
+| Name | What it is |
+| --- | --- |
+| `SUPABASE_URL` | Your Supabase project URL |
+| `SUPABASE_ANON_KEY` | Supabase anon / publishable key |
+| `RESEND_API_KEY` | Resend API key for “you're on the list” email |
+
+**On your computer:** a gitignored file named `.env` (copy from `.env.example`). Same names, one per line.
+
+**On Cloudflare (production):**
+
+1. Open [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+2. Click the Pages project (`smart-grocer-beta` once created)
+3. **Settings** → **Variables and Secrets** (sometimes labeled **Environment variables**)
+4. **Add**, name exactly as above, paste the value, choose **Secret** / **Encrypt**
+5. Add all three for **Production** and again for **Preview** if Cloudflare shows both
+
+Until those three are set on Pages, the site still loads; **Request access** returns an error because the waitlist function refuses to run without them.
+
+## Ship to production (still editable)
+
+One-time, in the same Cloudflare account that already hosts `smartgrocerapp.com`:
+
+1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) → **Create** → **Pages** → **Connect to Git** → this repo (`SmartGrocerBetaWebsite`)
+2. Production branch: `main` (merge [PR #1](https://github.com/bentleyw117/SmartGrocerBetaWebsite/pull/1) first, or temporarily use `cursor/smart-grocer-marketing-site-ac7d`)
+3. Build command: `npm run build`
+4. Build output directory: `dist`
+5. Root directory: `/`
+6. Add the three secrets above
+7. **Custom domains** → add `beta.smartgrocerapp.com` only  
+   Cloudflare will create a `beta` CNAME. Do not add www. Do not add the apex. Do not edit MX / SPF / DKIM.
+
+After that, editing is: change the code → open a PR → merge to `main` → Pages rebuilds. No redeploy ritual.
 
 ## Waitlist
 
@@ -37,64 +69,33 @@ Signups insert into Supabase table `beta_waitlist` (email unique). Repeat emails
 
 After a first-time insert, a confirmation email is sent via Resend from `Smart Grocer <hello@smartgrocerapp.com>`. No operator notify email.
 
-SQL for the table lives in `supabase/migrations/20260817210000_create_beta_waitlist.sql` and has been applied on the existing Smart Grocer project.
+SQL: `supabase/migrations/20260817210000_create_beta_waitlist.sql` (already applied).
 
-## Drop-in media
+## Brand files
 
-Leave these paths empty until real files exist. The layout already reserves space.
+| Path | Use |
+| --- | --- |
+| `public/brand/logo.svg` | Nav, hero, footer well (preferred) |
+| `public/brand/logo.png` | Fallback |
+| `public/brand/favicon.png` | Tab icon |
+| `public/brand/og.png` | Link previews, 1200 × 630 |
 
-### Brand
-
-| Path | Use | Notes |
-| --- | --- | --- |
-| `public/brand/logo.svg` | Nav, hero, footer well | Preferred. Square or wide; `object-fit: contain` in a 1:1 well (`2.75rem` nav / `3.5rem` hero). |
-| `public/brand/logo.png` | Fallback if SVG is missing | Same well. |
-| `public/brand/favicon.png` | Favicon | Replace the typeset wordmark when a real icon exists. |
-| `public/brand/og.png` | Open Graph | 1200 × 630. |
-
-Empty logo wells omit the glyph and keep the box so a later mark does not reflow the header.
-
-### Product preview
+## Product preview (drop in later)
 
 | Path | Caption / role | Recommended size |
 | --- | --- | --- |
-| `public/preview/phone-1.png` | List | 1170 × 2532 (9:19.5), PNG |
-| `public/preview/phone-2.png` | Optimize | 1170 × 2532 (9:19.5), PNG |
-| `public/preview/phone-3.png` | Shop | 1170 × 2532 (9:19.5), PNG |
-| `public/preview/poster.jpg` | Video poster (required when video ships) | 1920 × 1080, JPG |
+| `public/preview/phone-1.png` | List | 1170 × 2532 (9:19.5) |
+| `public/preview/phone-2.png` | Optimize | 1170 × 2532 (9:19.5) |
+| `public/preview/phone-3.png` | Shop | 1170 × 2532 (9:19.5) |
+| `public/preview/poster.jpg` | Video poster | 1920 × 1080 |
 | `public/preview/demo.mp4` | Muted product film | 1920 × 1080, H.264, muted |
 
-When a file is present it appears; when it is missing the designed empty state stays. No layout rewrite.
+Missing files keep the designed empty state.
 
-## Deploy to Cloudflare Pages
-
-Ask before production deploy or DNS.
-
-1. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect this GitHub repo (or Direct Upload).
-2. Build command: `npm run build`
-3. Build output directory: `dist`
-4. Root directory: `/` (this repo is the site)
-5. Compatibility date: `2026-08-17` (also in `wrangler.jsonc`)
-6. Add **encrypted** environment variables / secrets (production and preview):
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
-   - `RESEND_API_KEY`
-7. Project name in `wrangler.jsonc`: `smart-grocer-beta`
-8. Custom domain **only after confirmation**: `beta.smartgrocerapp.com` on the existing `smartgrocerapp.com` zone. No www. No apex redirect.
-
-Direct upload without Git:
+## Local commands
 
 ```bash
+npm run typecheck
 npm run build
-npx wrangler pages deploy dist --project-name=smart-grocer-beta
+npm run pages:dev
 ```
-
-Set secrets (do not put them in `wrangler.jsonc`):
-
-```bash
-npx wrangler pages secret put SUPABASE_URL --project-name=smart-grocer-beta
-npx wrangler pages secret put SUPABASE_ANON_KEY --project-name=smart-grocer-beta
-npx wrangler pages secret put RESEND_API_KEY --project-name=smart-grocer-beta
-```
-
-Privacy draft: `/privacy` (from `privacy.html`). Approve copy before treating it as final.
