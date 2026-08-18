@@ -4,15 +4,15 @@ Public waitlist for the Smart Grocer beta. Conversion goal: collect testers.
 
 Canonical URL (once you attach the domain): https://beta.smartgrocerapp.com
 
-You can keep editing after it is live. Production is just this GitHub repo on Cloudflare Pages. A change on `main` (or a merged pull request) rebuilds the site. Preview URLs on pull requests let you look before merging.
+You can keep editing after it is live. This GitHub repo deploys with **Workers Builds**. A merge to `main` rebuilds production. Other branches can get preview URLs.
 
 Do not change Resend MX / SPF / DKIM on `smartgrocerapp.com`. A `beta` CNAME is the only DNS this site needs.
 
 ## How to look at it
 
-Until Pages is connected, there is no public URL yet. After you connect the repo (steps below), Cloudflare gives you:
+After the first successful Workers Builds deploy:
 
-- A preview URL like `https://smart-grocer-beta.pages.dev` (safe to share, not the custom domain)
+- `https://smart-grocer-beta.<your-subdomain>.workers.dev`
 - Later: `https://beta.smartgrocerapp.com`
 
 On your laptop:
@@ -21,14 +21,14 @@ On your laptop:
 cp .env.example .env
 # paste the three keys into .env
 npm install
-npm run pages:dev
+npm run preview
 ```
 
 Open the localhost URL Wrangler prints (usually `http://127.0.0.1:8787`).
 
-## What “Pages secrets” are
+## Secrets (waitlist keys)
 
-They are **not** a special Smart Grocer setting. They are three values Cloudflare injects into the waitlist function so keys never go in the website JavaScript.
+Three values the waitlist uses. They never go in the public JavaScript.
 
 | Name | What it is |
 | --- | --- |
@@ -36,32 +36,35 @@ They are **not** a special Smart Grocer setting. They are three values Cloudflar
 | `SUPABASE_ANON_KEY` | Supabase anon / publishable key |
 | `RESEND_API_KEY` | Resend API key for “you're on the list” email |
 
-**On your computer:** a gitignored file named `.env` (copy from `.env.example`). Same names, one per line.
+**Laptop:** gitignored `.env` (copy `.env.example`).
 
-**On Cloudflare (production):**
+**Cloudflare runtime:** Workers & Pages → `smart-grocer-beta` → **Settings** → **Variables and Secrets**. Add all three, encrypted, for Production and Preview.
 
-1. Open [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
-2. Click the Pages project (`smart-grocer-beta` once created)
-3. **Settings** → **Variables and Secrets** (sometimes labeled **Environment variables**)
-4. **Add**, name exactly as above, paste the value, choose **Secret** / **Encrypt**
-5. Add all three for **Production** and again for **Preview** if Cloudflare shows both
+Until those exist, the page still loads; **Request access** fails.
 
-Until those three are set on Pages, the site still loads; **Request access** returns an error because the waitlist function refuses to run without them.
+The token Workers Builds uses to *upload* the Worker is separate. It is **not** under Manage Account → API Tokens. Look at:
 
-## Ship to production (still editable)
+- [My Profile → API Tokens](https://dash.cloudflare.com/profile/api-tokens)
+- or the Worker → **Settings** → **Builds** → API token dropdown
 
-One-time, in the same Cloudflare account that already hosts `smartgrocerapp.com`:
+You do not need to paste that token into the repo. Leave **Create new token** as-is. That auto token can deploy **Workers**, not Pages — so this project uses `npx wrangler deploy`, not `wrangler pages deploy`.
 
-1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) → **Create** → **Pages** → **Connect to Git** → this repo (`SmartGrocerBetaWebsite`)
-2. Production branch: `main` (merge [PR #1](https://github.com/bentleyw117/SmartGrocerBetaWebsite/pull/1) first, or temporarily use `cursor/smart-grocer-marketing-site-ac7d`)
-3. Build command: `npm run build`
-4. Build output directory: `dist`
-5. Root directory: `/`
-6. Add the three secrets above
-7. **Custom domains** → add `beta.smartgrocerapp.com` only  
-   Cloudflare will create a `beta` CNAME. Do not add www. Do not add the apex. Do not edit MX / SPF / DKIM.
+## Cloudflare build settings
 
-After that, editing is: change the code → open a PR → merge to `main` → Pages rebuilds. No redeploy ritual.
+In the Worker **Settings → Builds** (or the create form):
+
+| Field | Value |
+| --- | --- |
+| Project / Worker name | `smart-grocer-beta` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production deploy command | `npx wrangler versions upload` |
+| Path | `/` |
+| API token | Create new token |
+| API token name | `smart-grocer-beta-builds` |
+| Build variables | leave empty |
+
+Custom domain: add **only** `beta.smartgrocerapp.com`. Do not add www or the apex. Do not edit MX / SPF / DKIM.
 
 ## Waitlist
 
@@ -97,5 +100,5 @@ Missing files keep the designed empty state.
 ```bash
 npm run typecheck
 npm run build
-npm run pages:dev
+npm run preview
 ```

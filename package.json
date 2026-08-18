@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit && tsc -p functions/tsconfig.json --noEmit",
-    "pages:dev": "npm run build && wrangler pages dev dist --compatibility-date=2026-08-17",
-    "preview": "npm run pages:dev"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "latest",

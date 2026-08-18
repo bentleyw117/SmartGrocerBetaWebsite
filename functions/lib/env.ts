@@ -1,4 +1,4 @@
-interface Env {
+export interface WaitlistEnv {
   SUPABASE_URL?: string;
   SUPABASE_ANON_KEY?: string;
   RESEND_API_KEY?: string;
@@ -10,7 +10,7 @@ export interface RequiredEnv {
   RESEND_API_KEY: string;
 }
 
-export function requireEnv(env: Env): RequiredEnv {
+export function requireEnv(env: WaitlistEnv): RequiredEnv {
   const supabaseUrl = env.SUPABASE_URL;
   const supabaseAnonKey = env.SUPABASE_ANON_KEY;
   const resendApiKey = env.RESEND_API_KEY;

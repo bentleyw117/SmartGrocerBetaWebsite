@@ -1,12 +1,6 @@
 import { sendWaitlistEmail } from "../lib/email";
-import { requireEnv } from "../lib/env";
+import { requireEnv, type WaitlistEnv } from "../lib/env";
 import { allowRequest } from "../lib/rate-limit";
-
-interface Env {
-  SUPABASE_URL?: string;
-  SUPABASE_ANON_KEY?: string;
-  RESEND_API_KEY?: string;
-}
 
 interface WaitlistFields {
   email: string;
@@ -23,36 +17,43 @@ interface JsonObject {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ZIP_PATTERN = /^\d{5}$/;
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
+export async function handleWaitlistRequest(request: Request, env: WaitlistEnv): Promise<Response> {
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: corsHeaders(request) });
+  }
+  if (request.method !== "POST") {
+    return json({ ok: false, error: "Use POST." }, 405, request);
+  }
+
   try {
-    const env = requireEnv(context.env);
-    if (!(await allowRequest(context.request))) {
-      return json({ ok: false, error: "Please wait a few minutes and try again." }, 429, context.request);
+    const required = requireEnv(env);
+    if (!(await allowRequest(request))) {
+      return json({ ok: false, error: "Please wait a few minutes and try again." }, 429, request);
     }
 
-    const payload = await readJson(context.request);
+    const payload = await readJson(request);
     if (!payload) {
-      return json({ ok: false, error: "Send a JSON body." }, 400, context.request);
+      return json({ ok: false, error: "Send a JSON body." }, 400, request);
     }
 
     const parsed = parseFields(payload);
     if ("error" in parsed) {
-      return json({ ok: false, error: parsed.error, fields: parsed.fields }, 400, context.request);
+      return json({ ok: false, error: parsed.error, fields: parsed.fields }, 400, request);
     }
 
     if (parsed.website !== "") {
-      return json({ ok: true }, 200, context.request);
+      return json({ ok: true }, 200, request);
     }
 
-    const inserted = await insertWaitlist(env, parsed, context.request.headers.get("user-agent"));
+    const inserted = await insertWaitlist(required, parsed, request.headers.get("user-agent"));
     if (inserted === "error") {
-      return json({ ok: false, error: "We couldn’t save that just now. Try again." }, 500, context.request);
+      return json({ ok: false, error: "We couldn’t save that just now. Try again." }, 500, request);
     }
 
     if (inserted === "created") {
       try {
         await sendWaitlistEmail({
-          apiKey: env.RESEND_API_KEY,
+          apiKey: required.RESEND_API_KEY,
           to: parsed.email,
           name: parsed.name,
         });
@@ -61,20 +62,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       }
     }
 
-    return json({ ok: true }, 200, context.request);
+    return json({ ok: true }, 200, request);
   } catch (error) {
     console.error("waitlist handler failed", error);
-    return json({ ok: false, error: "Waitlist is temporarily unavailable." }, 500, context.request);
+    return json({ ok: false, error: "Waitlist is temporarily unavailable." }, 500, request);
   }
-};
-
-export const onRequestOptions: PagesFunction<Env> = async (context) => {
-  return new Response(null, { status: 204, headers: corsHeaders(context.request) });
-};
-
-export const onRequest: PagesFunction<Env> = async (context) => {
-  return json({ ok: false, error: "Use POST." }, 405, context.request);
-};
+}
 
 async function readJson(request: Request): Promise<JsonObject | null> {
   const contentType = request.headers.get("content-type") ?? "";
