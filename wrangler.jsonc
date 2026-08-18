@@ -2,9 +2,5 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "smart-grocer-beta",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-08-17",
-  "observability": {
-    "enabled": true,
-    "head_sampling_rate": 1
-  }
+  "compatibility_date": "2026-08-17"
 }
