@@ -80,7 +80,13 @@ SQL: `supabase/migrations/20260817210000_create_beta_waitlist.sql` (already appl
 | --- | --- |
 | `public/brand/logo.svg` | Nav, hero, footer well (preferred) |
 | `public/brand/logo.png` | Fallback |
-| `public/brand/favicon.png` | Tab icon |
+| `public/favicon.ico` | Classic tab icon (48×48) |
+| `public/favicon-16x16.png` | Browser tabs, bookmarks |
+| `public/favicon-32x32.png` | High-DPI tabs, taskbar shortcuts |
+| `public/apple-touch-icon.png` | iOS home screen (180×180) |
+| `public/android-chrome-192x192.png` | Android home screen / PWA |
+| `public/android-chrome-512x512.png` | Android splash / PWA install |
+| `public/site.webmanifest` | Web app manifest (Android / PWA icons) |
 | `public/brand/og.png` | Link previews, 1200 × 630 |
 
 ## Product preview (drop in later)
