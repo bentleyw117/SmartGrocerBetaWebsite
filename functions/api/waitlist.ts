@@ -88,7 +88,11 @@ async function readJson(request: Request): Promise<JsonObject | null> {
 function parseFields(body: JsonObject): WaitlistFields | { error: string; fields: Record<string, string> } {
   const fields: Record<string, string> = {};
   const email = stringify(body.email).trim().toLowerCase();
-  const name = stringify(body.name).trim();
+  const firstName = stringify(body.first_name).trim();
+  const lastName = stringify(body.last_name).trim();
+  const legacyName = stringify(body.name).trim();
+  const name =
+    [firstName, lastName].filter(Boolean).join(" ") || legacyName;
   const zip = stringify(body.zip).trim();
   const stores = stringify(body.stores).trim();
   const website = stringify(body.website).trim();
@@ -99,11 +103,23 @@ function parseFields(body: JsonObject): WaitlistFields | { error: string; fields
     fields.email = "Enter a valid email.";
   }
 
-  if (name.length > 80) {
-    fields.name = "Keep this under 80 characters.";
+  if (!firstName && !legacyName) {
+    fields.first_name = "Enter your first name.";
+  } else if (firstName.length > 40) {
+    fields.first_name = "Keep this under 40 characters.";
   }
 
-  if (zip && !ZIP_PATTERN.test(zip)) {
+  if (lastName.length > 40) {
+    fields.last_name = "Keep this under 40 characters.";
+  }
+
+  if (name.length > 80) {
+    fields.first_name = "Keep your name under 80 characters.";
+  }
+
+  if (!zip) {
+    fields.zip = "Enter your zip.";
+  } else if (!ZIP_PATTERN.test(zip)) {
     fields.zip = "Use a 5-digit US zip.";
   }
 
@@ -117,8 +133,8 @@ function parseFields(body: JsonObject): WaitlistFields | { error: string; fields
 
   return {
     email,
-    name: name === "" ? null : name,
-    zip: zip === "" ? null : zip,
+    name,
+    zip,
     stores: stores === "" ? null : stores,
     website,
   };

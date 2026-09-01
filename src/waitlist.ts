@@ -87,6 +87,8 @@ function readForm(
   const name = [first, last].filter(Boolean).join(" ");
   return {
     email: String(data.get("email") ?? ""),
+    first_name: first,
+    last_name: last,
     name,
     zip: String(data.get("zip") ?? ""),
     stores: combined,
@@ -99,10 +101,21 @@ function validate(body: Record<string, string>): Record<string, string> {
   const email = body.email?.trim() ?? "";
   if (!email) errors.email = "Enter your email.";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Enter a valid email.";
-  const zip = body.zip?.trim() ?? "";
-  if (zip && !/^\d{5}$/.test(zip)) errors.zip = "Use a 5-digit US zip.";
+
+  const first = body.first_name?.trim() ?? "";
+  if (!first) errors.first_name = "Enter your first name.";
+  else if (first.length > 40) errors.first_name = "Keep this under 40 characters.";
+
+  const last = body.last_name?.trim() ?? "";
+  if (last.length > 40) errors.last_name = "Keep this under 40 characters.";
+
   const name = body.name?.trim() ?? "";
   if (name.length > 80) errors.first_name = "Keep your name under 80 characters.";
+
+  const zip = body.zip?.trim() ?? "";
+  if (!zip) errors.zip = "Enter your zip.";
+  else if (!/^\d{5}$/.test(zip)) errors.zip = "Use a 5-digit US zip.";
+
   return errors;
 }
 
