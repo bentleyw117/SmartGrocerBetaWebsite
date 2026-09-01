@@ -11,7 +11,6 @@ export function initMotion(): void {
   initMagneticButtons();
   initRipples();
   initTiltCards();
-  initPhoneTilt();
   initReceipt();
   initChipFeedback();
 }
@@ -77,38 +76,15 @@ function initTiltCards(): void {
   });
 }
 
-function initPhoneTilt(): void {
-  const stage = document.querySelector<HTMLElement>("[data-tilt-stage]");
-  if (!stage) return;
-
-  const track = stage.querySelector<HTMLElement>(".phone-track");
-  if (!track) return;
-
-  stage.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse") return;
-    if (!window.matchMedia("(min-width: 960px)").matches) return;
-    const rect = stage.getBoundingClientRect();
-    const px = (event.clientX - rect.left) / rect.width - 0.5;
-    const py = (event.clientY - rect.top) / rect.height - 0.5;
-    track.style.setProperty("--fan-x", `${(px * 18).toFixed(2)}px`);
-    track.style.setProperty("--fan-y", `${(py * 10).toFixed(2)}px`);
-    track.style.setProperty("--fan-rot", `${(px * 4).toFixed(2)}deg`);
-  });
-
-  stage.addEventListener("pointerleave", () => {
-    track.style.setProperty("--fan-x", "0px");
-    track.style.setProperty("--fan-y", "0px");
-    track.style.setProperty("--fan-rot", "0deg");
-  });
-}
-
 function initReceipt(): void {
   const receipt = document.querySelector<HTMLElement>("[data-receipt]");
   if (!receipt) return;
 
   const save = receipt.querySelector<HTMLElement>("[data-receipt-save]");
-  const low = receipt.querySelector<HTMLElement>("[data-receipt-low]");
-  const high = receipt.querySelector<HTMLElement>("[data-receipt-high]");
+  const prices = receipt.querySelectorAll<HTMLElement>("[data-price]");
+  const total = receipt.querySelector<HTMLElement>("[data-receipt-total]");
+  const compare = receipt.querySelector<HTMLElement>("[data-receipt-compare]");
+  const saveValue = receipt.querySelector<HTMLElement>("[data-save-value]");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -116,12 +92,19 @@ function initReceipt(): void {
         if (!entry.isIntersecting) continue;
         receipt.classList.add("is-live");
         save?.setAttribute("aria-hidden", "false");
-        animatePrice(low?.querySelector("[data-price]"), 3.49);
-        animatePrice(high?.querySelector("[data-price]"), 5.29);
+        prices.forEach((node, index) => {
+          const value = Number(node.dataset.value);
+          if (!Number.isNaN(value)) {
+            window.setTimeout(() => animatePrice(node, value), index * 120);
+          }
+        });
+        if (total) animatePrice(total, Number(total.dataset.value));
+        if (compare) animatePrice(compare, Number(compare.dataset.value));
+        if (saveValue) animatePrice(saveValue, Number(saveValue.dataset.value));
         observer.unobserve(receipt);
       }
     },
-    { threshold: 0.45 },
+    { threshold: 0.35 },
   );
   observer.observe(receipt);
 

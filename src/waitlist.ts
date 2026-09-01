@@ -82,9 +82,12 @@ function readForm(
     .filter((value) => value !== "");
   const extra = stores?.value.trim() ?? "";
   const combined = [...selected, extra].filter(Boolean).join(", ");
+  const first = String(data.get("first_name") ?? "").trim();
+  const last = String(data.get("last_name") ?? "").trim();
+  const name = [first, last].filter(Boolean).join(" ");
   return {
     email: String(data.get("email") ?? ""),
-    name: String(data.get("name") ?? ""),
+    name,
     zip: String(data.get("zip") ?? ""),
     stores: combined,
     website: String(data.get("website") ?? ""),
@@ -98,6 +101,8 @@ function validate(body: Record<string, string>): Record<string, string> {
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Enter a valid email.";
   const zip = body.zip?.trim() ?? "";
   if (zip && !/^\d{5}$/.test(zip)) errors.zip = "Use a 5-digit US zip.";
+  const name = body.name?.trim() ?? "";
+  if (name.length > 80) errors.first_name = "Keep your name under 80 characters.";
   return errors;
 }
 

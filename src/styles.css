@@ -322,14 +322,25 @@ textarea:focus-visible {
   max-width: 38rem;
 }
 
+.hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.35rem;
+}
+
+.hero-brand .wordmark--lg {
+  margin: 0;
+}
+
 .kicker {
-  margin: 0.85rem 0 0;
+  margin: 1.15rem 0 0;
   color: var(--taupe);
   font-size: 1.05rem;
 }
 
 .hero h1 {
-  margin: 1.15rem 0 0;
+  margin: 1.35rem 0 0;
   font-weight: 600;
   font-size: clamp(2.15rem, 6.4vw, 4.4rem);
   line-height: 1.12;
@@ -337,10 +348,11 @@ textarea:focus-visible {
 }
 
 .stakes {
-  margin: 1.15rem 0 0;
+  margin: 1.35rem 0 0;
   font-size: 1.12rem;
   color: var(--espresso);
   max-width: 34rem;
+  line-height: 1.65;
 }
 
 .hero-actions {
@@ -348,7 +360,7 @@ textarea:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.9rem;
-  margin-top: 1.6rem;
+  margin-top: 1.85rem;
 }
 
 .us-beta {
@@ -375,14 +387,10 @@ textarea:focus-visible {
 }
 
 .phone-track {
-  --fan-x: 0px;
-  --fan-y: 0px;
-  --fan-rot: 0deg;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   min-height: 22rem;
-  transition: transform 0.35s var(--ease-out);
 }
 
 .phone {
@@ -578,8 +586,81 @@ h2 {
 .receipt {
   margin-top: 1.6rem;
   padding: 1.35rem 1.4rem;
-  max-width: 26rem;
+  max-width: 34rem;
   cursor: default;
+}
+
+.receipt-items {
+  display: grid;
+  gap: 0;
+}
+
+.receipt-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.receipt-item strong {
+  font-weight: 500;
+}
+
+.receipt-store {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--taupe);
+  letter-spacing: 0.02em;
+}
+
+.receipt-price {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.receipt-row--pick .receipt-store {
+  color: var(--terracotta-deep);
+}
+
+.receipt-row--alt {
+  font-size: 0.92rem;
+}
+
+.receipt-totals {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.receipt-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.receipt-total--best {
+  color: var(--espresso);
+  font-size: 1.02rem;
+}
+
+.receipt-total--compare {
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.receipt.is-live .receipt-row--pick {
+  color: var(--espresso);
+}
+
+.receipt.is-hover .receipt-row--pick {
+  background: color-mix(in srgb, var(--terracotta) 8%, transparent);
+  margin-inline: -0.45rem;
+  padding-inline: 0.45rem;
+  border-radius: 8px;
 }
 
 .receipt.is-hover {
@@ -611,16 +692,13 @@ h2 {
   border-bottom: 0;
 }
 
-.receipt.is-live [data-receipt-low] {
-  color: var(--espresso);
-  font-weight: 600;
-}
-
-.receipt.is-hover [data-receipt-low] {
-  background: color-mix(in srgb, var(--terracotta) 10%, transparent);
-  margin-inline: -0.45rem;
-  padding-inline: 0.45rem;
-  border-radius: 8px;
+.receipt-items .receipt-row:nth-child(2),
+.receipt-items .receipt-row:nth-child(4),
+.receipt-items .receipt-row:nth-child(6),
+.receipt-items .receipt-row:nth-child(8) {
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 0.15rem;
+  padding-bottom: 0.55rem;
 }
 
 .receipt-save {
@@ -689,6 +767,16 @@ h2 {
     translateY(-4px);
 }
 
+.step-card.is-tilting,
+.step-card:hover,
+.step-card:focus-visible {
+  box-shadow:
+    0 10px 28px rgba(194, 115, 81, 0.2),
+    0 0 0 1px rgba(194, 115, 81, 0.22),
+    0 0 32px rgba(194, 115, 81, 0.14);
+  border-color: color-mix(in srgb, var(--terracotta) 48%, var(--border));
+}
+
 .step-num {
   margin: 0;
   font-weight: 600;
@@ -709,6 +797,51 @@ h2 {
 
 .mini-phones {
   display: none;
+}
+
+.strategy-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.strategy-card {
+  padding: 1.35rem 1.3rem;
+}
+
+.strategy-card--featured {
+  background: color-mix(in srgb, var(--terracotta) 7%, var(--oat));
+  border-color: color-mix(in srgb, var(--terracotta) 30%, var(--border));
+}
+
+.strategy-tag {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.strategy-card h3 {
+  margin: 0.45rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.strategy-card p {
+  margin: 0.55rem 0 0;
+}
+
+.strategy-points {
+  margin: 0.85rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--taupe);
+  font-size: 0.92rem;
+}
+
+.strategy-points li + li {
+  margin-top: 0.35rem;
 }
 
 .split {
@@ -738,41 +871,53 @@ h2 {
 
 .waitlist-wrap > .section-label,
 .waitlist-wrap > h2,
-.waitlist-wrap > .lede,
-.waitlist-wrap > .coverage {
+.waitlist-wrap > .lede {
   text-align: left;
 }
 
-.waitlist-card {
-  margin-top: 1.25rem;
-  padding: 1.15rem 1.05rem 1.15rem;
-  font-size: 0.95rem;
+.waitlist-lede {
+  margin-bottom: 0.75rem;
 }
 
-.coverage {
-  margin: 0.7rem 0 1.2rem;
-  color: var(--taupe);
+.waitlist-card {
+  margin-top: 0.65rem;
+  padding: 1rem 1rem 0.95rem;
   font-size: 0.92rem;
 }
 
 .field {
   display: grid;
-  gap: 0.3rem;
-  margin-bottom: 0.85rem;
+  gap: 0.22rem;
+  margin-bottom: 0.55rem;
+}
+
+.field--compact {
+  margin-bottom: 0.45rem;
+}
+
+.field-row {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.field-row .field {
+  margin-bottom: 0;
+}
+
+.stores-intro {
+  margin-bottom: 0.1rem;
+  font-size: 0.82rem;
+}
+
+.stores-more-label {
+  margin-top: 0.25rem;
 }
 
 .field span,
 .field-label {
   font-weight: 500;
-  font-size: 0.88rem;
-}
-
-.stores-intro {
-  margin-bottom: 0.15rem;
-}
-
-.stores-more-label {
-  margin-top: 0.35rem;
+  font-size: 0.84rem;
 }
 
 .req {
@@ -783,7 +928,7 @@ h2 {
 .help {
   margin: 0;
   color: var(--taupe);
-  font-size: 0.88rem;
+  font-size: 0.8rem;
 }
 
 input[type="email"],
@@ -794,8 +939,11 @@ textarea {
   background: var(--cream);
   color: var(--espresso);
   border-radius: 12px;
-  padding: 0.62rem 0.75rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  padding: 0.55rem 0.7rem;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
 }
 
 input[type="email"]:hover,
@@ -807,25 +955,36 @@ textarea:hover {
 input[type="email"]:focus,
 input[type="text"]:focus,
 textarea:focus {
-  border-color: color-mix(in srgb, var(--terracotta) 55%, var(--border));
-  box-shadow: 0 0 0 3px rgba(194, 115, 81, 0.16);
+  outline: none;
+  border-color: var(--terracotta);
   background: var(--white);
+  box-shadow:
+    0 0 0 3px rgba(194, 115, 81, 0.22),
+    0 0 18px rgba(194, 115, 81, 0.28),
+    0 0 36px rgba(194, 115, 81, 0.12);
 }
 
 textarea {
-  min-height: 4.5rem;
+  min-height: 3.2rem;
   resize: vertical;
 }
 
 .field.error input,
 .field.error textarea {
   border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(194, 115, 81, 0.14);
 }
 
 .field-error {
-  min-height: 1.1rem;
+  min-height: 0.85rem;
   color: var(--terracotta);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+}
+
+.privacy-note {
+  margin: 0.65rem 0 0;
+  color: var(--taupe);
+  font-size: 0.82rem;
 }
 
 .chips {
@@ -906,12 +1065,6 @@ textarea {
 .success h3 {
   margin: 0;
   font-size: 1.4rem;
-}
-
-.privacy-note {
-  margin: 1rem 0 0;
-  color: var(--taupe);
-  font-size: 0.9rem;
 }
 
 .footer {
@@ -1062,6 +1215,14 @@ textarea {
     grid-template-columns: 1fr 1fr;
   }
 
+  .strategy-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .split {
     grid-template-columns: 1fr 1fr;
   }
@@ -1090,7 +1251,6 @@ textarea {
     min-height: 32rem;
     position: relative;
     height: 34rem;
-    transform: translate3d(var(--fan-x), var(--fan-y), 0) rotate(var(--fan-rot));
   }
 
   .phone {
