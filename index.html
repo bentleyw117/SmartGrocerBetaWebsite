@@ -54,31 +54,35 @@
             <p class="motto nav-motto">Stop searching. Start saving.</p>
           </div>
         </a>
-        <a class="btn nav-cta" href="#waitlist">Join the beta</a>
+        <a class="btn btn--pulse nav-cta" href="#waitlist" data-magnetic>Join the beta</a>
       </div>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <div class="logo-well logo-well--hero" data-logo-well>
-              <img src="/brand/logo.svg" alt="" width="56" height="56" />
+          <div class="hero-copy" data-hero-enter>
+            <div class="hero-brand hero-enter" style="--enter: 0">
+              <div class="logo-well logo-well--hero" data-logo-well>
+                <img src="/brand/logo.svg" alt="" width="56" height="56" />
+              </div>
+              <p class="wordmark wordmark--lg">Smart Grocer</p>
             </div>
-            <p class="wordmark wordmark--lg">Smart Grocer</p>
-            <p class="kicker">Stop searching. Start saving.</p>
-            <h1>Find the absolute lowest prices for your grocery list.</h1>
-            <p class="stakes">
-              The same list costs different amounts at your usual stores. You shouldn’t have to hunt
-              every item across every site you already use.
+            <p class="kicker hero-enter" style="--enter: 1">Stop searching. Start saving.</p>
+            <h1 class="hero-enter" style="--enter: 2">
+              Find the lowest prices for your whole grocery list.
+            </h1>
+            <p class="stakes hero-enter" style="--enter: 3">
+              Your usual stores don’t charge the same for the same cart. Smart Grocer compares live
+              prices across the grocers you already use — so you skip the site-by-site homework.
             </p>
-            <div class="hero-actions">
-              <a class="btn" href="#waitlist">Join the beta</a>
+            <div class="hero-actions hero-enter" style="--enter: 4">
+              <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
               <span class="us-beta">US beta</span>
             </div>
           </div>
 
-          <aside class="preview-stage" aria-label="App preview">
+          <aside class="preview-stage hero-enter" aria-label="App preview" style="--enter: 3">
             <div class="phone-stage" data-phone-stage>
               <div class="phone-track">
                 <figure class="phone" data-slot="0">
@@ -144,7 +148,7 @@
             </figure>
 
             <div class="hero-repeat-cta">
-              <a class="btn" href="#waitlist">Join the beta</a>
+              <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
             </div>
           </aside>
         </div>
@@ -159,12 +163,66 @@
             every site you already use. Then you still have to drive. Smart Grocer does that
             homework, then hands you a trip you shop in the aisle.
           </p>
-          <div class="card receipt">
-            <p class="receipt-label">Example prices</p>
-            <div class="receipt-row"><span>Eggs, 12 ct</span><span>$3.49</span></div>
-            <div class="receipt-row muted"><span>Same eggs, another store</span><span>$5.29</span></div>
+          <div class="card receipt" data-receipt>
+            <p class="receipt-label">Example · same list, four stores</p>
+            <div class="receipt-items">
+              <div class="receipt-row receipt-row--pick">
+                <span class="receipt-item"
+                  ><strong>Large eggs, 12 ct</strong><em class="receipt-store">Walmart</em></span
+                ><span class="receipt-price" data-price data-value="3.49">$3.49</span>
+              </div>
+              <div class="receipt-row receipt-row--alt muted">
+                <span class="receipt-item"
+                  ><strong>Large eggs, 12 ct</strong><em class="receipt-store">Target</em></span
+                ><span class="receipt-price">$4.89</span>
+              </div>
+              <div class="receipt-row receipt-row--pick">
+                <span class="receipt-item"
+                  ><strong>Whole milk, 1 gal</strong><em class="receipt-store">Fareway</em></span
+                ><span class="receipt-price" data-price data-value="2.79">$2.79</span>
+              </div>
+              <div class="receipt-row receipt-row--alt muted">
+                <span class="receipt-item"
+                  ><strong>Whole milk, 1 gal</strong><em class="receipt-store">Hy-Vee</em></span
+                ><span class="receipt-price">$3.49</span>
+              </div>
+              <div class="receipt-row receipt-row--pick">
+                <span class="receipt-item"
+                  ><strong>Sourdough bread</strong><em class="receipt-store">Costco</em></span
+                ><span class="receipt-price" data-price data-value="4.29">$4.29</span>
+              </div>
+              <div class="receipt-row receipt-row--alt muted">
+                <span class="receipt-item"
+                  ><strong>Sourdough bread</strong><em class="receipt-store">Target</em></span
+                ><span class="receipt-price">$5.49</span>
+              </div>
+              <div class="receipt-row receipt-row--pick">
+                <span class="receipt-item"
+                  ><strong>Chicken breast, 2 lb</strong><em class="receipt-store">Sam's Club</em></span
+                ><span class="receipt-price" data-price data-value="7.98">$7.98</span>
+              </div>
+              <div class="receipt-row receipt-row--alt muted">
+                <span class="receipt-item"
+                  ><strong>Chicken breast, 2 lb</strong><em class="receipt-store">Target</em></span
+                ><span class="receipt-price">$11.49</span>
+              </div>
+            </div>
+            <div class="receipt-totals">
+              <div class="receipt-total receipt-total--best">
+                <span>Split trip total</span>
+                <span data-receipt-total data-value="18.55">$18.55</span>
+              </div>
+              <div class="receipt-total receipt-total--compare muted">
+                <span>Same list at Target</span>
+                <span data-receipt-compare data-value="25.36">$25.36</span>
+              </div>
+            </div>
+            <div class="receipt-save" data-receipt-save aria-hidden="true">
+              <span class="receipt-save-label">You save</span>
+              <span class="receipt-save-value" data-save-value data-value="6.81">$6.81</span>
+            </div>
             <p class="help">
-              Same list. Different totals — before tax — depending on where each item is cheapest.
+              Lowest price per item across your stores vs. buying everything at one stop — before tax.
             </p>
           </div>
         </div>
@@ -179,21 +237,21 @@
             lowest matching price per item, and group the result into a trip across your usual
             stores. Unmatched items are dropped, not guessed.
           </p>
-          <div class="steps">
-            <article class="card step">
+          <div class="steps" data-stagger>
+            <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">01 · List</p>
               <h3>Write what you need</h3>
               <p>One item per line. Diet preferences can influence matching.</p>
             </article>
-            <article class="card step">
+            <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">02 · Optimize</p>
               <h3>We do the comparison</h3>
               <p>
-                Lowest matching price per item, then grouped by store. We'll prefer products that
-                match your diet when we optimize your trip.
+                Pick single trip or split trip, then we match products and prices. We'll prefer
+                items that fit your diet when we optimize.
               </p>
             </article>
-            <article class="card step">
+            <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">03 · Trip</p>
               <h3>See where to go</h3>
               <p>
@@ -201,7 +259,7 @@
                 prioritize prices from your favorites.
               </p>
             </article>
-            <article class="card step">
+            <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">04 · Shop</p>
               <h3>Walk the aisle</h3>
               <p>Maps plus an in-store checklist. You pay at the store, like always.</p>
@@ -248,19 +306,56 @@
         </div>
       </section>
 
+      <section class="reveal" id="strategy">
+        <div class="wrap">
+          <p class="section-label">Choose your strategy</p>
+          <h2>Pick how you want to shop.</h2>
+          <p class="lede">
+            Before you optimize, choose the trip style that fits your week. You can switch anytime in
+            the app.
+          </p>
+          <div class="strategy-grid" data-stagger>
+            <article class="card strategy-card" data-tilt-card tabindex="0">
+              <p class="strategy-tag">Single trip</p>
+              <h3>One store. Lowest total.</h3>
+              <p>
+                We find the single store where your whole list costs the least — best when you want
+                one stop, one receipt, and the shortest run.
+              </p>
+              <ul class="strategy-points">
+                <li>Compares totals across your usual stores</li>
+                <li>Picks the store with the lowest cart total</li>
+              </ul>
+            </article>
+            <article class="card strategy-card strategy-card--featured" data-tilt-card tabindex="0">
+              <p class="strategy-tag">Split trip</p>
+              <h3>Multiple stores. Lowest per item.</h3>
+              <p>
+                We pick the cheapest store for each item on your list — best when you're willing to
+                hit a few favorites to maximize savings.
+              </p>
+              <ul class="strategy-points">
+                <li>Lowest matching price for every item</li>
+                <li>Grouped into stops across your stores</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="reveal" id="value">
         <div class="wrap">
           <p class="section-label">Time and money</p>
           <h2>Skip the website hop. Keep the lowest matching price.</h2>
-          <div class="split">
-            <article class="card">
+          <div class="split" data-stagger>
+            <article class="card" data-tilt-card tabindex="0">
               <h3>Time</h3>
               <p>
                 Stop opening each grocer’s website, searching every product, and comparing pack
                 sizes by hand. Smart Grocer does that homework so you can go shop.
               </p>
             </article>
-            <article class="card">
+            <article class="card" data-tilt-card tabindex="0">
               <h3>Money</h3>
               <p>
                 We pick the lowest matching price per item, then group those items into a trip.
@@ -273,16 +368,11 @@
       </section>
 
       <section class="waitlist reveal" id="waitlist">
-        <div class="wrap">
+        <div class="wrap waitlist-wrap">
           <p class="section-label">US beta</p>
           <h2>Join the beta</h2>
-          <p class="lede">
-            Request access and we'll invite testers as we go. We'll use this to find local grocery
-            stores in your area.
-          </p>
-          <p class="coverage">
-            We're expanding store coverage by zip. Telling us where you shop helps us invite the
-            right testers first.
+          <p class="lede waitlist-lede">
+            Request access and we'll invite testers as we go.
           </p>
 
           <div class="card waitlist-card">
@@ -292,12 +382,31 @@
                 <input id="email" name="email" type="email" autocomplete="email" required />
                 <p class="field-error" data-error></p>
               </div>
-              <div class="field" data-field="name">
-                <label class="field-label" for="name">First name</label>
-                <input id="name" name="name" type="text" autocomplete="given-name" maxlength="80" />
-                <p class="field-error" data-error></p>
+              <div class="field-row">
+                <div class="field" data-field="first_name">
+                  <label class="field-label" for="first_name">First name</label>
+                  <input
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    autocomplete="given-name"
+                    maxlength="40"
+                  />
+                  <p class="field-error" data-error></p>
+                </div>
+                <div class="field" data-field="last_name">
+                  <label class="field-label" for="last_name">Last name</label>
+                  <input
+                    id="last_name"
+                    name="last_name"
+                    type="text"
+                    autocomplete="family-name"
+                    maxlength="40"
+                  />
+                  <p class="field-error" data-error></p>
+                </div>
               </div>
-              <div class="field" data-field="zip">
+              <div class="field field--compact" data-field="zip">
                 <label class="field-label" for="zip">Zip</label>
                 <input
                   id="zip"
@@ -308,39 +417,51 @@
                   maxlength="5"
                   pattern="\d{5}"
                 />
-                <p class="help">What's your zip? We'll look at grocers around you.</p>
+                <p class="help">We'll look at grocers around you.</p>
                 <p class="field-error" data-error></p>
               </div>
-              <div class="field" data-field="stores">
-                <p class="field-label" id="stores-label">Where do you usually shop?</p>
+              <div class="field field--compact" data-field="stores">
+                <p class="field-label" id="stores-label">Which grocery stores do you go to?</p>
+                <p class="help stores-intro">
+                  Tap any that look familiar. Add regional favorites below if we missed yours.
+                </p>
                 <div class="chips" role="group" aria-labelledby="stores-label">
-                  <button class="chip" type="button" data-value="Neighborhood grocer" aria-pressed="false">
-                    Neighborhood grocer
+                  <button class="chip" type="button" data-value="Walmart" aria-pressed="false">
+                    Walmart
                   </button>
-                  <button class="chip" type="button" data-value="Warehouse club" aria-pressed="false">
-                    Warehouse club
+                  <button class="chip" type="button" data-value="Target" aria-pressed="false">
+                    Target
                   </button>
-                  <button class="chip" type="button" data-value="Discount grocer" aria-pressed="false">
-                    Discount grocer
+                  <button class="chip" type="button" data-value="Costco" aria-pressed="false">
+                    Costco
                   </button>
-                  <button class="chip" type="button" data-value="Specialty grocer" aria-pressed="false">
-                    Specialty grocer
+                  <button class="chip" type="button" data-value="Sam's Club" aria-pressed="false">
+                    Sam's Club
+                  </button>
+                  <button class="chip" type="button" data-value="Hy-Vee" aria-pressed="false">
+                    Hy-Vee
+                  </button>
+                  <button class="chip" type="button" data-value="Fareway" aria-pressed="false">
+                    Fareway
                   </button>
                 </div>
+                <label class="field-label stores-more-label" for="stores">Other stores</label>
                 <textarea
                   id="stores"
                   name="stores"
                   maxlength="400"
-                  placeholder="Any stores you already use — names help us research, not a coverage promise."
+                  placeholder="Regional chains, neighborhood markets, or anything we missed…"
+                  rows="2"
                 ></textarea>
-                <p class="help">We'll prioritize prices from your favorites.</p>
                 <p class="field-error" data-error></p>
               </div>
               <div class="hp" aria-hidden="true">
                 <label for="website">Company website</label>
                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
-              <button class="btn" type="submit">Request access</button>
+              <button class="btn btn--pulse btn--block" type="submit" data-magnetic data-ripple>
+                Request access
+              </button>
               <p class="form-status" data-form-status role="status"></p>
               <p class="privacy-note">
                 We only use this to invite you to the Smart Grocer beta.
@@ -376,7 +497,7 @@
     </footer>
 
     <div class="dock">
-      <a class="btn" href="#waitlist">Join the beta</a>
+      <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
     </div>
 
     <script type="module" src="/src/main.ts"></script>
