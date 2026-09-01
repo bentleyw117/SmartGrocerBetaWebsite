@@ -36,7 +36,7 @@
             <p class="motto nav-motto">Stop searching. Start saving.</p>
           </div>
         </a>
-        <a class="btn nav-cta" href="/#waitlist">Join the beta</a>
+        <a class="btn btn--pulse nav-cta" href="/#waitlist" data-magnetic>Join the beta</a>
       </div>
     </header>
 
@@ -46,7 +46,7 @@
       <p class="draft-banner">
         This page is a short draft for human approval. It is not legal advice.
       </p>
-      <p class="lede">Last updated August 17, 2026.</p>
+      <p class="lede">Last updated September 1, 2026.</p>
 
       <h2>Who we are</h2>
       <p>
@@ -58,8 +58,9 @@
       <p>When you request beta access, we store:</p>
       <ul>
         <li>Email (required)</li>
-        <li>First name, if you share it</li>
-        <li>5-digit US zip, if you share it</li>
+        <li>First name (required)</li>
+        <li>Last name, if you share it</li>
+        <li>5-digit US zip (required)</li>
         <li>Where you usually shop, if you share it</li>
         <li>The date you joined, and a browser user-agent string</li>
       </ul>
@@ -67,9 +68,9 @@
 
       <h2>How we use it</h2>
       <p>
-        We only use this to invite you to the Smart Grocer beta. Zip and usual stores help us
-        understand coverage and invite the right testers first. They are not a promise that a
-        particular store is supported.
+        We only use this to invite you to the Smart Grocer beta. Your name and zip help us invite
+        the right testers and understand local store coverage. Store preferences are optional and
+        are not a promise that a particular store is supported.
       </p>
       <p>
         After you join, we send a confirmation email from Smart Grocer
@@ -119,6 +120,10 @@
         </div>
       </div>
     </footer>
+
+    <div class="dock">
+      <a class="btn btn--pulse" href="/#waitlist" data-magnetic>Join the beta</a>
+    </div>
 
     <script type="module" src="/src/privacy.ts"></script>
   </body>

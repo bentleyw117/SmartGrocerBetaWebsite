@@ -384,13 +384,16 @@
               </div>
               <div class="field-row">
                 <div class="field" data-field="first_name">
-                  <label class="field-label" for="first_name">First name</label>
+                  <label class="field-label" for="first_name"
+                    >First name <span class="req">(required)</span></label
+                  >
                   <input
                     id="first_name"
                     name="first_name"
                     type="text"
                     autocomplete="given-name"
                     maxlength="40"
+                    required
                   />
                   <p class="field-error" data-error></p>
                 </div>
@@ -407,7 +410,7 @@
                 </div>
               </div>
               <div class="field field--compact" data-field="zip">
-                <label class="field-label" for="zip">Zip</label>
+                <label class="field-label" for="zip">Zip <span class="req">(required)</span></label>
                 <input
                   id="zip"
                   name="zip"
@@ -416,6 +419,7 @@
                   autocomplete="postal-code"
                   maxlength="5"
                   pattern="\d{5}"
+                  required
                 />
                 <p class="help">We'll look at grocers around you.</p>
                 <p class="field-error" data-error></p>
