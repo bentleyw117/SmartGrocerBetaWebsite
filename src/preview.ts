@@ -1,6 +1,8 @@
 const PHONE_FILES = ["/preview/phone-1.png", "/preview/phone-2.png", "/preview/phone-3.png"] as const;
 const VIDEO_SRC = "/preview/demo.mp4";
 const POSTER_SRC = "/preview/poster.jpg";
+const MOBILE_STACK_QUERY = "(max-width: 959px)";
+const SWIPE_THRESHOLD = 48;
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -31,14 +33,71 @@ function initPhones(stage: HTMLElement | null): void {
     });
   };
 
+  const next = () => show(active + 1);
+  const prev = () => show(active - 1);
+
   dots.forEach((dot, index) => {
     dot.addEventListener("click", () => show(index));
   });
+
+  initPhoneSwipe(stage, { next, prev });
 
   const media = window.matchMedia("(min-width: 960px)");
   const onChange = () => show(active);
   media.addEventListener("change", onChange);
   show(0);
+}
+
+function initPhoneSwipe(
+  stage: HTMLElement,
+  handlers: { next: () => void; prev: () => void },
+): void {
+  const mobile = window.matchMedia(MOBILE_STACK_QUERY);
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+
+  const reset = () => {
+    tracking = false;
+  };
+
+  const onStart = (x: number, y: number) => {
+    if (!mobile.matches) return;
+    startX = x;
+    startY = y;
+    tracking = true;
+  };
+
+  const onEnd = (x: number, y: number) => {
+    if (!tracking || !mobile.matches) return;
+    tracking = false;
+    const dx = x - startX;
+    const dy = y - startY;
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) handlers.next();
+    else handlers.prev();
+  };
+
+  stage.addEventListener("pointerdown", (event) => {
+    if (!mobile.matches) return;
+    onStart(event.clientX, event.clientY);
+    stage.setPointerCapture(event.pointerId);
+  });
+
+  stage.addEventListener("pointerup", (event) => {
+    if (!tracking) return;
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
+    onEnd(event.clientX, event.clientY);
+  });
+
+  stage.addEventListener("pointercancel", (event) => {
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
+    reset();
+  });
 }
 
 function bindPhone(phone: HTMLElement, src: string): void {
