@@ -57,6 +57,10 @@ function initPhoneSwipe(
   let startY = 0;
   let tracking = false;
 
+  const reset = () => {
+    tracking = false;
+  };
+
   const onStart = (x: number, y: number) => {
     if (!mobile.matches) return;
     startX = x;
@@ -74,34 +78,25 @@ function initPhoneSwipe(
     else handlers.prev();
   };
 
-  stage.addEventListener(
-    "touchstart",
-    (event) => {
-      const touch = event.changedTouches[0];
-      if (!touch) return;
-      onStart(touch.clientX, touch.clientY);
-    },
-    { passive: true },
-  );
-
-  stage.addEventListener(
-    "touchend",
-    (event) => {
-      const touch = event.changedTouches[0];
-      if (!touch) return;
-      onEnd(touch.clientX, touch.clientY);
-    },
-    { passive: true },
-  );
-
   stage.addEventListener("pointerdown", (event) => {
-    if (event.pointerType !== "mouse" || !mobile.matches) return;
+    if (!mobile.matches) return;
     onStart(event.clientX, event.clientY);
+    stage.setPointerCapture(event.pointerId);
   });
 
   stage.addEventListener("pointerup", (event) => {
-    if (event.pointerType !== "mouse" || !mobile.matches) return;
+    if (!tracking) return;
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
     onEnd(event.clientX, event.clientY);
+  });
+
+  stage.addEventListener("pointercancel", (event) => {
+    if (stage.hasPointerCapture(event.pointerId)) {
+      stage.releasePointerCapture(event.pointerId);
+    }
+    reset();
   });
 }
 
