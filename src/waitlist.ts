@@ -16,6 +16,7 @@ export function initWaitlist(form: HTMLFormElement | null): void {
     chip.addEventListener("click", () => {
       const pressed = chip.getAttribute("aria-pressed") === "true";
       chip.setAttribute("aria-pressed", pressed ? "false" : "true");
+      chip.classList.toggle("is-selected", !pressed);
     });
   });
 

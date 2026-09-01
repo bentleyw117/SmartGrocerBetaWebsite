@@ -54,32 +54,32 @@
             <p class="motto nav-motto">Stop searching. Start saving.</p>
           </div>
         </a>
-        <a class="btn nav-cta" href="#waitlist">Join the beta</a>
+        <a class="btn btn--pulse nav-cta" href="#waitlist" data-magnetic>Join the beta</a>
       </div>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="wrap hero-grid">
-          <div class="hero-copy">
-            <div class="logo-well logo-well--hero" data-logo-well>
+          <div class="hero-copy" data-hero-enter>
+            <div class="logo-well logo-well--hero hero-enter" data-logo-well style="--enter: 0">
               <img src="/brand/logo.svg" alt="" width="56" height="56" />
             </div>
-            <p class="wordmark wordmark--lg">Smart Grocer</p>
-            <p class="kicker">Stop searching. Start saving.</p>
-            <h1>Find the absolute lowest prices for your grocery list.</h1>
-            <p class="stakes">
+            <p class="wordmark wordmark--lg hero-enter" style="--enter: 1">Smart Grocer</p>
+            <p class="kicker hero-enter" style="--enter: 2">Stop searching. Start saving.</p>
+            <h1 class="hero-enter" style="--enter: 3">Find the absolute lowest prices for your grocery list.</h1>
+            <p class="stakes hero-enter" style="--enter: 4">
               The same list costs different amounts at your usual stores. You shouldn’t have to hunt
               every item across every site you already use.
             </p>
-            <div class="hero-actions">
-              <a class="btn" href="#waitlist">Join the beta</a>
+            <div class="hero-actions hero-enter" style="--enter: 5">
+              <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
               <span class="us-beta">US beta</span>
             </div>
           </div>
 
-          <aside class="preview-stage" aria-label="App preview">
-            <div class="phone-stage" data-phone-stage>
+          <aside class="preview-stage hero-enter" aria-label="App preview" style="--enter: 3">
+            <div class="phone-stage" data-phone-stage data-tilt-stage>
               <div class="phone-track">
                 <figure class="phone" data-slot="0">
                   <div class="phone-chrome">
@@ -144,7 +144,7 @@
             </figure>
 
             <div class="hero-repeat-cta">
-              <a class="btn" href="#waitlist">Join the beta</a>
+              <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
             </div>
           </aside>
         </div>
@@ -159,10 +159,18 @@
             every site you already use. Then you still have to drive. Smart Grocer does that
             homework, then hands you a trip you shop in the aisle.
           </p>
-          <div class="card receipt">
+          <div class="card receipt" data-receipt>
             <p class="receipt-label">Example prices</p>
-            <div class="receipt-row"><span>Eggs, 12 ct</span><span>$3.49</span></div>
-            <div class="receipt-row muted"><span>Same eggs, another store</span><span>$5.29</span></div>
+            <div class="receipt-row" data-receipt-low>
+              <span>Eggs, 12 ct</span><span data-price data-value="3.49">$3.49</span>
+            </div>
+            <div class="receipt-row muted" data-receipt-high>
+              <span>Same eggs, another store</span><span data-price data-value="5.29">$5.29</span>
+            </div>
+            <div class="receipt-save" data-receipt-save aria-hidden="true">
+              <span class="receipt-save-label">Difference</span>
+              <span class="receipt-save-value" data-save-value>$1.80</span>
+            </div>
             <p class="help">
               Same list. Different totals — before tax — depending on where each item is cheapest.
             </p>
@@ -179,13 +187,13 @@
             lowest matching price per item, and group the result into a trip across your usual
             stores. Unmatched items are dropped, not guessed.
           </p>
-          <div class="steps">
-            <article class="card step">
+          <div class="steps" data-stagger>
+            <article class="card step" data-tilt-card tabindex="0">
               <p class="step-num">01 · List</p>
               <h3>Write what you need</h3>
               <p>One item per line. Diet preferences can influence matching.</p>
             </article>
-            <article class="card step">
+            <article class="card step" data-tilt-card tabindex="0">
               <p class="step-num">02 · Optimize</p>
               <h3>We do the comparison</h3>
               <p>
@@ -193,7 +201,7 @@
                 match your diet when we optimize your trip.
               </p>
             </article>
-            <article class="card step">
+            <article class="card step" data-tilt-card tabindex="0">
               <p class="step-num">03 · Trip</p>
               <h3>See where to go</h3>
               <p>
@@ -201,7 +209,7 @@
                 prioritize prices from your favorites.
               </p>
             </article>
-            <article class="card step">
+            <article class="card step" data-tilt-card tabindex="0">
               <p class="step-num">04 · Shop</p>
               <h3>Walk the aisle</h3>
               <p>Maps plus an in-store checklist. You pay at the store, like always.</p>
@@ -252,15 +260,15 @@
         <div class="wrap">
           <p class="section-label">Time and money</p>
           <h2>Skip the website hop. Keep the lowest matching price.</h2>
-          <div class="split">
-            <article class="card">
+          <div class="split" data-stagger>
+            <article class="card" data-tilt-card tabindex="0">
               <h3>Time</h3>
               <p>
                 Stop opening each grocer’s website, searching every product, and comparing pack
                 sizes by hand. Smart Grocer does that homework so you can go shop.
               </p>
             </article>
-            <article class="card">
+            <article class="card" data-tilt-card tabindex="0">
               <h3>Money</h3>
               <p>
                 We pick the lowest matching price per item, then group those items into a trip.
@@ -273,7 +281,7 @@
       </section>
 
       <section class="waitlist reveal" id="waitlist">
-        <div class="wrap">
+        <div class="wrap waitlist-wrap">
           <p class="section-label">US beta</p>
           <h2>Join the beta</h2>
           <p class="lede">
@@ -312,35 +320,48 @@
                 <p class="field-error" data-error></p>
               </div>
               <div class="field" data-field="stores">
-                <p class="field-label" id="stores-label">Where do you usually shop?</p>
+                <p class="field-label" id="stores-label">Which grocery stores do you go to?</p>
+                <p class="help stores-intro">
+                  Tap any that look familiar — no wrong answers. Add regional or local favorites
+                  below if we missed yours.
+                </p>
                 <div class="chips" role="group" aria-labelledby="stores-label">
-                  <button class="chip" type="button" data-value="Neighborhood grocer" aria-pressed="false">
-                    Neighborhood grocer
+                  <button class="chip" type="button" data-value="Walmart" aria-pressed="false">
+                    Walmart
                   </button>
-                  <button class="chip" type="button" data-value="Warehouse club" aria-pressed="false">
-                    Warehouse club
+                  <button class="chip" type="button" data-value="Target" aria-pressed="false">
+                    Target
                   </button>
-                  <button class="chip" type="button" data-value="Discount grocer" aria-pressed="false">
-                    Discount grocer
+                  <button class="chip" type="button" data-value="Kroger" aria-pressed="false">
+                    Kroger
                   </button>
-                  <button class="chip" type="button" data-value="Specialty grocer" aria-pressed="false">
-                    Specialty grocer
+                  <button class="chip" type="button" data-value="Costco" aria-pressed="false">
+                    Costco
+                  </button>
+                  <button class="chip" type="button" data-value="Publix" aria-pressed="false">
+                    Publix
+                  </button>
+                  <button class="chip" type="button" data-value="Safeway" aria-pressed="false">
+                    Safeway
                   </button>
                 </div>
+                <label class="field-label stores-more-label" for="stores">Other stores</label>
                 <textarea
                   id="stores"
                   name="stores"
                   maxlength="400"
-                  placeholder="Any stores you already use — names help us research, not a coverage promise."
+                  placeholder="Regional chains, neighborhood markets, or anything we missed…"
                 ></textarea>
-                <p class="help">We'll prioritize prices from your favorites.</p>
+                <p class="help">Names help us research coverage — not a promise we support them yet.</p>
                 <p class="field-error" data-error></p>
               </div>
               <div class="hp" aria-hidden="true">
                 <label for="website">Company website</label>
                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
-              <button class="btn" type="submit">Request access</button>
+              <button class="btn btn--pulse btn--block" type="submit" data-magnetic data-ripple>
+                Request access
+              </button>
               <p class="form-status" data-form-status role="status"></p>
               <p class="privacy-note">
                 We only use this to invite you to the Smart Grocer beta.
@@ -376,7 +397,7 @@
     </footer>
 
     <div class="dock">
-      <a class="btn" href="#waitlist">Join the beta</a>
+      <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
     </div>
 
     <script type="module" src="/src/main.ts"></script>
