@@ -64,13 +64,13 @@ function initTiltCards(): void {
       const rect = card.getBoundingClientRect();
       const px = (event.clientX - rect.left) / rect.width - 0.5;
       const py = (event.clientY - rect.top) / rect.height - 0.5;
-      card.style.setProperty("--tilt-x", `${(-py * 4).toFixed(2)}deg`);
-      card.style.setProperty("--tilt-y", `${(px * 5).toFixed(2)}deg`);
+      const tiltX = (-py * 4).toFixed(2);
+      const tiltY = (px * 5).toFixed(2);
+      card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
       card.classList.add("is-tilting");
     });
     card.addEventListener("pointerleave", () => {
-      card.style.removeProperty("--tilt-x");
-      card.style.removeProperty("--tilt-y");
+      card.style.transform = "";
       card.classList.remove("is-tilting");
     });
   });

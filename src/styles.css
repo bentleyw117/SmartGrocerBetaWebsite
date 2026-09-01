@@ -748,10 +748,12 @@ h2 {
 }
 
 [data-tilt-card] {
-  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
-    translateY(0);
   transform-style: preserve-3d;
   will-change: transform;
+  transition:
+    transform 0.12s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    border-color 0.35s ease;
 }
 
 [data-tilt-card].is-tilting,
@@ -759,12 +761,6 @@ h2 {
 [data-tilt-card]:focus-visible {
   box-shadow: 0 16px 34px rgba(62, 49, 36, 0.12);
   border-color: color-mix(in srgb, var(--terracotta) 28%, var(--border));
-}
-
-[data-tilt-card]:hover,
-[data-tilt-card]:focus-visible {
-  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
-    translateY(-4px);
 }
 
 .step-card.is-tilting,
@@ -1141,14 +1137,38 @@ textarea {
 
 .stagger-child.is-in {
   opacity: 1;
+  transition-delay: 0ms;
+}
+
+.stagger-child.is-in:not([data-tilt-card]) {
   transform: none;
+}
+
+.stagger-child.is-in[data-tilt-card] {
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.12s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    border-color 0.35s ease;
 }
 
 [data-tilt-card].stagger-child.is-in.is-tilting,
 [data-tilt-card].stagger-child.is-in:hover,
 [data-tilt-card].stagger-child.is-in:focus-visible {
-  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
-    translateY(-4px);
+  /* Transform is driven inline in motion.ts while tilting. */
+  box-shadow: 0 16px 34px rgba(62, 49, 36, 0.12);
+  border-color: color-mix(in srgb, var(--terracotta) 28%, var(--border));
+}
+
+.step-card.stagger-child.is-in.is-tilting,
+.step-card.stagger-child.is-in:hover,
+.step-card.stagger-child.is-in:focus-visible {
+  box-shadow:
+    0 10px 28px rgba(194, 115, 81, 0.2),
+    0 0 0 1px rgba(194, 115, 81, 0.22),
+    0 0 32px rgba(194, 115, 81, 0.14);
+  border-color: color-mix(in srgb, var(--terracotta) 48%, var(--border));
 }
 
 .js-ready .hero-enter {
