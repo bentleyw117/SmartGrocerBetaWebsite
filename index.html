@@ -40,10 +40,10 @@
     />
   </head>
   <body>
-    <div class="paper" aria-hidden="true"></div>
     <a class="skip-link" href="#waitlist">Skip to waitlist</a>
 
     <header class="nav">
+      <div class="nav-glow" aria-hidden="true"></div>
       <div class="wrap nav-inner">
         <a class="nav-identity" href="#top">
           <div class="logo-well" data-logo-well>
@@ -54,7 +54,7 @@
             <p class="motto nav-motto">Stop searching. Start saving.</p>
           </div>
         </a>
-        <a class="btn btn--pulse nav-cta" href="#waitlist" data-magnetic>Join the beta</a>
+        <a class="btn btn--pulse nav-cta" href="#waitlist">Join the beta</a>
       </div>
     </header>
 
@@ -73,29 +73,24 @@
             <source src="/preview/clouds_hero_background.mp4" type="video/mp4" />
           </video>
           <div class="hero-media-veil"></div>
+          <div class="hero-media-fade"></div>
         </div>
         <div class="wrap hero-band-inner" data-hero-enter>
           <div class="hero-copy">
-            <div class="hero-brand hero-enter" style="--enter: 0">
-              <div class="logo-well logo-well--hero" data-logo-well>
-                <img src="/brand/logo.svg" alt="" width="56" height="56" />
-              </div>
-              <p class="wordmark wordmark--lg">Smart Grocer</p>
-            </div>
-            <p class="kicker hero-enter" style="--enter: 1">Stop searching. Start saving.</p>
-            <h1 class="display hero-enter" style="--enter: 2">
+            <p class="kicker hero-enter" style="--enter: 0">Stop searching. Start saving.</p>
+            <h1 class="display hero-enter" style="--enter: 1">
               Find the lowest prices for your whole grocery list.
             </h1>
-            <p class="hero-tagline hero-enter" style="--enter: 3">
+            <p class="hero-tagline hero-enter" style="--enter: 2">
               Live prices across the grocers you already use.
             </p>
-            <p class="hero-cred hero-enter" style="--enter: 4">US beta · live local prices</p>
-            <div class="hero-actions hero-enter" style="--enter: 5">
+            <p class="hero-cred hero-enter" style="--enter: 3">US beta · live local prices</p>
+            <div class="hero-actions hero-enter" style="--enter: 4">
               <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
             </div>
           </div>
 
-          <div class="hero-peek hero-enter" style="--enter: 3" aria-hidden="true">
+          <div class="hero-peek hero-enter" style="--enter: 2" aria-hidden="true">
             <figure class="phone phone--peek" data-preview-phone="/preview/phone-1.png">
               <div class="phone-chrome">
                 <div class="phone-screen">
@@ -108,13 +103,6 @@
               </div>
             </figure>
           </div>
-
-          <a class="hero-scroll hero-enter" href="#features" style="--enter: 6">
-            <span>Scroll</span>
-            <svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true">
-              <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-            </svg>
-          </a>
         </div>
       </section>
 
