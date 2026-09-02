@@ -543,15 +543,6 @@ textarea:focus-visible {
   background: var(--oat);
 }
 
-.phone--tilt-in {
-  transform: perspective(1200px) rotateY(14deg);
-  transform-origin: center center;
-}
-
-.feature-band--reverse .phone--tilt-in {
-  transform: perspective(1200px) rotateY(-14deg);
-}
-
 .phone--peek {
   width: min(14rem, 58vw);
   transform: translateY(12%);
@@ -1379,11 +1370,6 @@ textarea {
   .hero-video.is-paused,
   .hero-video {
     display: none;
-  }
-
-  .phone--tilt-in,
-  .feature-band--reverse .phone--tilt-in {
-    transform: none;
   }
 
   .hero-media-veil {
