@@ -332,9 +332,9 @@ textarea:focus-visible {
 .hero-band {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   padding: 2.75rem 0 0;
-  margin-bottom: -4.5rem;
+  margin-bottom: -6rem;
   background: var(--cream);
   border-bottom: 0;
   border-radius: 0;
@@ -353,21 +353,23 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  /* Dissolve sky into the page cream so the hero bottom never hard-cuts. */
+  /* Long dissolve so sky never meets cream on a hard cut. */
   -webkit-mask-image: linear-gradient(
     180deg,
     #000 0%,
-    #000 42%,
-    rgba(0, 0, 0, 0.72) 62%,
-    rgba(0, 0, 0, 0.28) 80%,
+    #000 28%,
+    rgba(0, 0, 0, 0.75) 48%,
+    rgba(0, 0, 0, 0.4) 62%,
+    rgba(0, 0, 0, 0.14) 78%,
     transparent 100%
   );
   mask-image: linear-gradient(
     180deg,
     #000 0%,
-    #000 42%,
-    rgba(0, 0, 0, 0.72) 62%,
-    rgba(0, 0, 0, 0.28) 80%,
+    #000 28%,
+    rgba(0, 0, 0, 0.75) 48%,
+    rgba(0, 0, 0, 0.4) 62%,
+    rgba(0, 0, 0, 0.14) 78%,
     transparent 100%
   );
 }
@@ -390,18 +392,18 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   bottom: 0;
-  height: min(70%, 34rem);
+  height: min(78%, 40rem);
   z-index: 1;
   pointer-events: none;
   background:
     linear-gradient(
       180deg,
       transparent 0%,
-      color-mix(in srgb, var(--cream) 6%, transparent) 16%,
-      color-mix(in srgb, var(--cream) 22%, transparent) 34%,
-      color-mix(in srgb, var(--cream) 48%, transparent) 52%,
-      color-mix(in srgb, var(--cream) 78%, transparent) 70%,
-      color-mix(in srgb, var(--cream) 94%, transparent) 86%,
+      color-mix(in srgb, var(--cream) 10%, transparent) 18%,
+      color-mix(in srgb, var(--cream) 28%, transparent) 36%,
+      color-mix(in srgb, var(--cream) 55%, transparent) 54%,
+      color-mix(in srgb, var(--cream) 82%, transparent) 72%,
+      color-mix(in srgb, var(--cream) 96%, transparent) 88%,
       var(--cream) 100%
     );
 }
@@ -409,27 +411,47 @@ textarea:focus-visible {
 .hero-media-fade::after {
   content: "";
   position: absolute;
-  inset: 18% 0 -3rem;
+  inset: 8% 0 -5rem;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    color-mix(in srgb, var(--cream) 42%, transparent) 42%,
+    color-mix(in srgb, var(--cream) 35%, transparent) 35%,
+    color-mix(in srgb, var(--cream) 78%, transparent) 70%,
+    var(--cream) 100%
+  );
+  filter: blur(36px);
+  opacity: 0.95;
+  transform: scaleY(1.25);
+  transform-origin: bottom center;
+}
+
+/* Extra cream wash that continues past the hero into features. */
+.hero-band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5rem;
+  height: min(52%, 26rem);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 20%, transparent) 30%,
+    color-mix(in srgb, var(--cream) 55%, transparent) 55%,
     color-mix(in srgb, var(--cream) 88%, transparent) 78%,
     var(--cream) 100%
   );
-  filter: blur(28px);
-  opacity: 0.9;
-  transform: scaleY(1.2);
-  transform-origin: bottom center;
 }
 
 .hero-band-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   gap: 2rem;
   text-align: center;
-  padding-bottom: 6.5rem;
+  padding-bottom: 7.5rem;
 }
 
 .hero-copy {
@@ -500,15 +522,9 @@ textarea:focus-visible {
 .features {
   position: relative;
   z-index: 1;
-  /* Keep the top transparent so it doesn't stamp a hard cream edge over the hero dissolve. */
+  /* Fully transparent: body cream shows through; avoids a hard band edge over the hero wash. */
   padding: 0.5rem 0 1rem;
-  background: linear-gradient(
-    180deg,
-    transparent 0,
-    transparent 3.5rem,
-    var(--cream) 9rem,
-    var(--cream) 100%
-  );
+  background: transparent;
 }
 
 .features::before {
@@ -516,16 +532,16 @@ textarea:focus-visible {
   position: absolute;
   left: 0;
   right: 0;
-  top: -10rem;
-  height: 14rem;
+  top: -12rem;
+  height: 16rem;
   z-index: 0;
   pointer-events: none;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    color-mix(in srgb, var(--cream) 18%, transparent) 28%,
-    color-mix(in srgb, var(--cream) 55%, transparent) 58%,
-    color-mix(in srgb, var(--cream) 88%, transparent) 82%,
+    color-mix(in srgb, var(--cream) 12%, transparent) 22%,
+    color-mix(in srgb, var(--cream) 40%, transparent) 48%,
+    color-mix(in srgb, var(--cream) 78%, transparent) 75%,
     var(--cream) 100%
   );
 }
@@ -1337,21 +1353,26 @@ textarea {
 
   .hero-band {
     padding: 3.5rem 0 0;
-    margin-bottom: -5.5rem;
+    margin-bottom: -7rem;
   }
 
   .hero-band-inner {
     gap: 2.25rem;
-    padding-bottom: 7.5rem;
+    padding-bottom: 8.5rem;
   }
 
   .hero-media-fade {
-    height: min(74%, 38rem);
+    height: min(82%, 44rem);
+  }
+
+  .hero-band::after {
+    bottom: -6rem;
+    height: min(56%, 30rem);
   }
 
   .features::before {
-    top: -11rem;
-    height: 13rem;
+    top: -14rem;
+    height: 18rem;
   }
 
   .feature-band-shell {
