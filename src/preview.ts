@@ -1,9 +1,11 @@
 const PHONE_FILES = [
+  "/preview/phone-hero.png",
   "/preview/phone-1.png",
   "/preview/phone-2.png",
   "/preview/phone-3.png",
   "/preview/phone-4.png",
   "/preview/phone-5.png",
+  "/preview/phone-6.png",
 ] as const;
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;

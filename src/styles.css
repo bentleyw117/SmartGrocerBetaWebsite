@@ -519,6 +519,39 @@ textarea:focus-visible {
   flex: 0 0 auto;
 }
 
+.phone--device {
+  position: relative;
+  perspective: 1200px;
+  filter: drop-shadow(0 22px 40px rgba(62, 49, 36, 0.2));
+}
+
+.phone--device > img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.phone--device > img.is-hidden {
+  display: none;
+}
+
+.phone--device .phone-empty {
+  position: relative;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 1.85rem;
+  background: var(--oat);
+}
+
+.phone--tilt-in {
+  transform: perspective(1200px) rotateY(14deg);
+  transform-origin: center center;
+}
+
+.feature-band--reverse .phone--tilt-in {
+  transform: perspective(1200px) rotateY(-14deg);
+}
+
 .phone--peek {
   width: min(14rem, 58vw);
   transform: translateY(12%);
@@ -527,14 +560,6 @@ textarea:focus-visible {
 .phone--strategy {
   width: min(11.5rem, 52vw);
   margin: 0 auto 1rem;
-}
-
-.phone--optimize .phone-screen img {
-  object-position: top center;
-}
-
-.phone--strategy .phone-screen img {
-  object-position: top center;
 }
 
 .phone-chrome {
@@ -546,7 +571,7 @@ textarea:focus-visible {
   transition: box-shadow 0.35s var(--ease-out), transform 0.35s var(--ease-out);
 }
 
-.phone:hover .phone-chrome {
+.phone:not(.phone--device):hover .phone-chrome {
   box-shadow: 0 22px 48px rgba(62, 49, 36, 0.22);
 }
 
@@ -1297,6 +1322,7 @@ textarea {
 
   .phone--peek {
     width: min(15.5rem, 42vw);
+    transform: translateY(10%);
   }
 
   .footer {
@@ -1353,6 +1379,11 @@ textarea {
   .hero-video.is-paused,
   .hero-video {
     display: none;
+  }
+
+  .phone--tilt-in,
+  .feature-band--reverse .phone--tilt-in {
+    transform: none;
   }
 
   .hero-media-veil {
