@@ -500,8 +500,15 @@ textarea:focus-visible {
 .features {
   position: relative;
   z-index: 1;
+  /* Keep the top transparent so it doesn't stamp a hard cream edge over the hero dissolve. */
   padding: 0.5rem 0 1rem;
-  background: var(--cream);
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 3.5rem,
+    var(--cream) 9rem,
+    var(--cream) 100%
+  );
 }
 
 .features::before {
@@ -509,14 +516,16 @@ textarea:focus-visible {
   position: absolute;
   left: 0;
   right: 0;
-  top: -9rem;
-  height: 11rem;
+  top: -10rem;
+  height: 14rem;
+  z-index: 0;
   pointer-events: none;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    color-mix(in srgb, var(--cream) 28%, transparent) 35%,
-    color-mix(in srgb, var(--cream) 72%, transparent) 68%,
+    color-mix(in srgb, var(--cream) 18%, transparent) 28%,
+    color-mix(in srgb, var(--cream) 55%, transparent) 58%,
+    color-mix(in srgb, var(--cream) 88%, transparent) 82%,
     var(--cream) 100%
   );
 }
