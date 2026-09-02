@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -59,9 +59,9 @@
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="wrap hero-grid">
-          <div class="hero-copy" data-hero-enter>
+      <section class="hero hero-band">
+        <div class="wrap hero-band-inner" data-hero-enter>
+          <div class="hero-copy">
             <div class="hero-brand hero-enter" style="--enter: 0">
               <div class="logo-well logo-well--hero" data-logo-well>
                 <img src="/brand/logo.svg" alt="" width="56" height="56" />
@@ -69,23 +69,51 @@
               <p class="wordmark wordmark--lg">Smart Grocer</p>
             </div>
             <p class="kicker hero-enter" style="--enter: 1">Stop searching. Start saving.</p>
-            <h1 class="hero-enter" style="--enter: 2">
+            <h1 class="display hero-enter" style="--enter: 2">
               Find the lowest prices for your whole grocery list.
             </h1>
-            <p class="stakes hero-enter" style="--enter: 3">
-              Your usual stores don’t charge the same for the same cart. Smart Grocer compares live
-              prices across the grocers you already use — so you skip the site-by-site homework.
+            <p class="hero-tagline hero-enter" style="--enter: 3">
+              Live prices across the grocers you already use.
             </p>
-            <div class="hero-actions hero-enter" style="--enter: 4">
+            <p class="hero-cred hero-enter" style="--enter: 4">US beta · live local prices</p>
+            <div class="hero-actions hero-enter" style="--enter: 5">
               <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
-              <span class="us-beta">US beta</span>
             </div>
           </div>
 
-          <aside class="preview-stage hero-enter" aria-label="App preview" style="--enter: 3">
-            <div class="phone-stage" data-phone-stage>
-              <div class="phone-track">
-                <figure class="phone" data-slot="0">
+          <div class="hero-peek hero-enter" style="--enter: 3" aria-hidden="true">
+            <figure class="phone phone--peek" data-preview-phone="/preview/phone-1.png">
+              <div class="phone-chrome">
+                <div class="phone-screen">
+                  <div class="phone-empty">
+                    <p class="wordmark">Smart Grocer</p>
+                    <p class="soon">Screenshots coming soon</p>
+                  </div>
+                  <img class="is-hidden" alt="" />
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <a class="hero-scroll hero-enter" href="#features" style="--enter: 6">
+            <span>Scroll</span>
+            <svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true">
+              <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <div id="features" class="features">
+        <article class="feature-band reveal" id="feature-draft">
+          <div class="wrap">
+            <div class="feature-band-shell">
+              <div class="feature-band-grid">
+                <figure
+                  class="phone"
+                  data-preview-phone="/preview/phone-1.png"
+                  data-preview-alt="Grocery list in the Smart Grocer app"
+                >
                   <div class="phone-chrome">
                     <div class="phone-screen">
                       <div class="phone-empty">
@@ -95,73 +123,116 @@
                       <img class="is-hidden" alt="Grocery list in the Smart Grocer app" />
                     </div>
                   </div>
-                  <figcaption>List</figcaption>
                 </figure>
-                <figure class="phone" data-slot="1">
-                  <div class="phone-chrome">
-                    <div class="phone-screen">
-                      <div class="phone-empty">
-                        <p class="wordmark">Smart Grocer</p>
-                        <p class="soon">Screenshots coming soon</p>
-                      </div>
-                      <img class="is-hidden" alt="Optimized trip in the Smart Grocer app" />
-                    </div>
-                  </div>
-                  <figcaption>Optimize</figcaption>
-                </figure>
-                <figure class="phone" data-slot="2">
-                  <div class="phone-chrome">
-                    <div class="phone-screen">
-                      <div class="phone-empty">
-                        <p class="wordmark">Smart Grocer</p>
-                        <p class="soon">Screenshots coming soon</p>
-                      </div>
-                      <img class="is-hidden" alt="In-aisle checklist in the Smart Grocer app" />
-                    </div>
-                  </div>
-                  <figcaption>Shop</figcaption>
-                </figure>
-              </div>
-              <div class="phone-nav" role="tablist" aria-label="Preview screens">
-                <button class="dot" type="button" aria-label="Show list" aria-current="true"></button>
-                <button class="dot" type="button" aria-label="Show optimize"></button>
-                <button class="dot" type="button" aria-label="Show shop"></button>
-              </div>
-            </div>
-
-            <figure class="film-well" data-film-well>
-              <div class="film-frame">
-                <div class="film-empty">
-                  <div class="play-mark" aria-hidden="true">
-                    <svg viewBox="0 0 12 14" fill="currentColor" aria-hidden="true">
-                      <path d="M1 1.2v11.6L11 7 1 1.2Z" />
-                    </svg>
-                  </div>
-                  <p class="soon">App preview</p>
+                <div class="feature-band-copy">
+                  <p class="section-label">01 · Draft</p>
+                  <h2 class="display-sm">Write what you need</h2>
+                  <p class="feature-tagline">One item per line.</p>
+                  <p class="feature-desc">Pick single or split trip before you optimize.</p>
                 </div>
-                <video class="is-hidden" muted playsinline loop preload="none"></video>
-                <button class="btn btn--ghost film-toggle is-hidden" type="button" data-film-toggle>
-                  Play
-                </button>
               </div>
-              <figcaption>List → priced stores → in-aisle checklist</figcaption>
-            </figure>
-
-            <div class="hero-repeat-cta">
-              <a class="btn btn--pulse" href="#waitlist" data-magnetic>Join the beta</a>
             </div>
-          </aside>
-        </div>
-      </section>
+          </div>
+        </article>
+
+        <article class="feature-band feature-band--reverse reveal" id="feature-optimize">
+          <div class="wrap">
+            <div class="feature-band-shell">
+              <div class="feature-band-grid">
+                <figure
+                  class="phone phone--optimize"
+                  data-preview-phone="/preview/phone-2.png"
+                  data-preview-alt="Optimized trip summary in the Smart Grocer app"
+                >
+                  <div class="phone-chrome">
+                    <div class="phone-screen">
+                      <div class="phone-empty">
+                        <p class="wordmark">Smart Grocer</p>
+                        <p class="soon">Screenshots coming soon</p>
+                      </div>
+                      <img class="is-hidden" alt="Optimized trip summary in the Smart Grocer app" />
+                    </div>
+                  </div>
+                </figure>
+                <div class="feature-band-copy">
+                  <p class="section-label">02 · Optimize</p>
+                  <h2 class="display-sm">We compare every store</h2>
+                  <p class="feature-tagline">Live prices across your usual stores.</p>
+                  <p class="feature-desc">Lowest matching price per item, grouped into a trip.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-band reveal" id="feature-shop">
+          <div class="wrap">
+            <div class="feature-band-shell">
+              <div class="feature-band-grid">
+                <figure
+                  class="phone"
+                  data-preview-phone="/preview/phone-3.png"
+                  data-preview-alt="Store checklist in the Smart Grocer app"
+                >
+                  <div class="phone-chrome">
+                    <div class="phone-screen">
+                      <div class="phone-empty">
+                        <p class="wordmark">Smart Grocer</p>
+                        <p class="soon">Screenshots coming soon</p>
+                      </div>
+                      <img class="is-hidden" alt="Store checklist in the Smart Grocer app" />
+                    </div>
+                  </div>
+                </figure>
+                <div class="feature-band-copy">
+                  <p class="section-label">03 · Shop</p>
+                  <h2 class="display-sm">Walk the aisle</h2>
+                  <p class="feature-tagline">Store-by-store checklist with prices.</p>
+                  <p class="feature-desc">Take me there, then pay at the store like always.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-band feature-band--reverse reveal" id="feature-trips">
+          <div class="wrap">
+            <div class="feature-band-shell">
+              <div class="feature-band-grid">
+                <figure
+                  class="phone"
+                  data-preview-phone="/preview/phone-4.png"
+                  data-preview-alt="My Trips in the Smart Grocer app"
+                >
+                  <div class="phone-chrome">
+                    <div class="phone-screen">
+                      <div class="phone-empty">
+                        <p class="wordmark">Smart Grocer</p>
+                        <p class="soon">Screenshots coming soon</p>
+                      </div>
+                      <img class="is-hidden" alt="My Trips in the Smart Grocer app" />
+                    </div>
+                  </div>
+                </figure>
+                <div class="feature-band-copy">
+                  <p class="section-label">04 · My Trips</p>
+                  <h2 class="display-sm">Reuse what worked</h2>
+                  <p class="feature-tagline">Drafts, active trips, and history.</p>
+                  <p class="feature-desc">Save a list and rerun it when it’s grocery day again.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
 
       <section class="reveal" id="trap">
         <div class="wrap">
           <p class="section-label">The unpaid homework</p>
           <h2>You already know the stores. The work is checking them.</h2>
           <p class="lede">
-            Open a grocer’s site. Search a product. Compare pack sizes. Repeat for every item, on
-            every site you already use. Then you still have to drive. Smart Grocer does that
-            homework, then hands you a trip you shop in the aisle.
+            Smart Grocer compares live prices across your stores — then hands you a trip you shop
+            in the aisle.
           </p>
           <div class="card receipt" data-receipt>
             <p class="receipt-label">Example · same list, four stores</p>
@@ -231,77 +302,31 @@
       <section class="reveal" id="how">
         <div class="wrap">
           <p class="section-label">How a trip works</p>
-          <h2>List. Optimize. Shop.</h2>
-          <p class="lede">
-            Type a grocery list, one item per line. We find live local products and prices, pick the
-            lowest matching price per item, and group the result into a trip across your usual
-            stores. Unmatched items are dropped, not guessed.
+          <h2>Draft. Optimize. Shop.</h2>
+          <p class="lede tagline-only">
+            Live local prices. Lowest match per item. Grouped into a trip.
           </p>
           <div class="steps" data-stagger>
             <article class="card step step-card" data-tilt-card tabindex="0">
-              <p class="step-num">01 · List</p>
+              <p class="step-num">01 · Draft</p>
               <h3>Write what you need</h3>
-              <p>One item per line. Diet preferences can influence matching.</p>
+              <p>One item per line.</p>
             </article>
             <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">02 · Optimize</p>
               <h3>We do the comparison</h3>
-              <p>
-                Pick single trip or split trip, then we match products and prices. We'll prefer
-                items that fit your diet when we optimize.
-              </p>
+              <p>Single or split trip — we match products and prices.</p>
             </article>
             <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">03 · Trip</p>
               <h3>See where to go</h3>
-              <p>
-                Which of your usual stores to hit, which items, estimated total before tax. We'll
-                prioritize prices from your favorites.
-              </p>
+              <p>Which stores, which items, estimated total before tax.</p>
             </article>
             <article class="card step step-card" data-tilt-card tabindex="0">
               <p class="step-num">04 · Shop</p>
               <h3>Walk the aisle</h3>
-              <p>Maps plus an in-store checklist. You pay at the store, like always.</p>
+              <p>Maps plus an in-store checklist.</p>
             </article>
-          </div>
-          <div class="mini-phones" data-mini-phones>
-            <figure class="phone">
-              <div class="phone-chrome">
-                <div class="phone-screen">
-                  <div class="phone-empty">
-                    <p class="wordmark">Smart Grocer</p>
-                    <p class="soon">Screenshots coming soon</p>
-                  </div>
-                  <img class="is-hidden" alt="" />
-                </div>
-              </div>
-              <figcaption>List</figcaption>
-            </figure>
-            <figure class="phone">
-              <div class="phone-chrome">
-                <div class="phone-screen">
-                  <div class="phone-empty">
-                    <p class="wordmark">Smart Grocer</p>
-                    <p class="soon">Screenshots coming soon</p>
-                  </div>
-                  <img class="is-hidden" alt="" />
-                </div>
-              </div>
-              <figcaption>Optimize</figcaption>
-            </figure>
-            <figure class="phone">
-              <div class="phone-chrome">
-                <div class="phone-screen">
-                  <div class="phone-empty">
-                    <p class="wordmark">Smart Grocer</p>
-                    <p class="soon">Screenshots coming soon</p>
-                  </div>
-                  <img class="is-hidden" alt="" />
-                </div>
-              </div>
-              <figcaption>Shop</figcaption>
-            </figure>
           </div>
         </div>
       </section>
@@ -310,30 +335,51 @@
         <div class="wrap">
           <p class="section-label">Choose your strategy</p>
           <h2>Pick how you want to shop.</h2>
-          <p class="lede">
-            Before you optimize, choose the trip style that fits your week. You can switch anytime in
-            the app.
-          </p>
+          <p class="lede tagline-only">Switch anytime in the app.</p>
           <div class="strategy-grid" data-stagger>
             <article class="card strategy-card" data-tilt-card tabindex="0">
+              <figure
+                class="phone phone--strategy"
+                data-preview-phone="/preview/phone-5.png"
+                data-preview-alt="Single-store trip summary in the Smart Grocer app"
+              >
+                <div class="phone-chrome">
+                  <div class="phone-screen">
+                    <div class="phone-empty">
+                      <p class="wordmark">Smart Grocer</p>
+                      <p class="soon">Screenshots coming soon</p>
+                    </div>
+                    <img class="is-hidden" alt="Single-store trip summary in the Smart Grocer app" />
+                  </div>
+                </div>
+              </figure>
               <p class="strategy-tag">Single trip</p>
               <h3>One store. Lowest total.</h3>
-              <p>
-                We find the single store where your whole list costs the least — best when you want
-                one stop, one receipt, and the shortest run.
-              </p>
+              <p>One stop, one receipt — the shortest run.</p>
               <ul class="strategy-points">
-                <li>Compares totals across your usual stores</li>
-                <li>Picks the store with the lowest cart total</li>
+                <li>Compares totals across your stores</li>
+                <li>Picks the lowest cart total</li>
               </ul>
             </article>
             <article class="card strategy-card strategy-card--featured" data-tilt-card tabindex="0">
+              <figure
+                class="phone phone--strategy"
+                data-preview-phone="/preview/phone-2.png"
+                data-preview-alt="Split-trip summary in the Smart Grocer app"
+              >
+                <div class="phone-chrome">
+                  <div class="phone-screen">
+                    <div class="phone-empty">
+                      <p class="wordmark">Smart Grocer</p>
+                      <p class="soon">Screenshots coming soon</p>
+                    </div>
+                    <img class="is-hidden" alt="Split-trip summary in the Smart Grocer app" />
+                  </div>
+                </div>
+              </figure>
               <p class="strategy-tag">Split trip</p>
               <h3>Multiple stores. Lowest per item.</h3>
-              <p>
-                We pick the cheapest store for each item on your list — best when you're willing to
-                hit a few favorites to maximize savings.
-              </p>
+              <p>Hit a few favorites to maximize savings.</p>
               <ul class="strategy-points">
                 <li>Lowest matching price for every item</li>
                 <li>Grouped into stops across your stores</li>
@@ -347,21 +393,15 @@
         <div class="wrap">
           <p class="section-label">Time and money</p>
           <h2>Skip the website hop. Keep the lowest matching price.</h2>
+          <p class="lede tagline-only">Less site hopping. Lower matching prices.</p>
           <div class="split" data-stagger>
             <article class="card" data-tilt-card tabindex="0">
               <h3>Time</h3>
-              <p>
-                Stop opening each grocer’s website, searching every product, and comparing pack
-                sizes by hand. Smart Grocer does that homework so you can go shop.
-              </p>
+              <p>Skip opening every grocer’s site and comparing pack sizes by hand.</p>
             </article>
             <article class="card" data-tilt-card tabindex="0">
               <h3>Money</h3>
-              <p>
-                We pick the lowest matching price per item, then group those items into a trip.
-                Estimated totals are before tax. No guaranteed dollar amount — just the comparison
-                you would have done yourself.
-              </p>
+              <p>Lowest matching price per item, grouped into a trip — before tax.</p>
             </article>
           </div>
         </div>
