@@ -353,6 +353,23 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* Dissolve sky into the page cream so the hero bottom never hard-cuts. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.72) 62%,
+    rgba(0, 0, 0, 0.28) 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.72) 62%,
+    rgba(0, 0, 0, 0.28) 80%,
+    transparent 100%
+  );
 }
 
 .hero-media-veil {
@@ -373,20 +390,37 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   bottom: 0;
-  height: min(42%, 18rem);
+  height: min(70%, 34rem);
+  z-index: 1;
   pointer-events: none;
   background:
     linear-gradient(
       180deg,
       transparent 0%,
-      color-mix(in srgb, var(--cream) 35%, transparent) 35%,
-      color-mix(in srgb, var(--cream) 78%, transparent) 68%,
+      color-mix(in srgb, var(--cream) 6%, transparent) 16%,
+      color-mix(in srgb, var(--cream) 22%, transparent) 34%,
+      color-mix(in srgb, var(--cream) 48%, transparent) 52%,
+      color-mix(in srgb, var(--cream) 78%, transparent) 70%,
+      color-mix(in srgb, var(--cream) 94%, transparent) 86%,
       var(--cream) 100%
     );
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-media-fade::after {
+  content: "";
+  position: absolute;
+  inset: 18% 0 -3rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 42%, transparent) 42%,
+    color-mix(in srgb, var(--cream) 88%, transparent) 78%,
+    var(--cream) 100%
+  );
+  filter: blur(28px);
+  opacity: 0.9;
+  transform: scaleY(1.2);
+  transform-origin: bottom center;
 }
 
 .hero-band-inner {
@@ -468,6 +502,23 @@ textarea:focus-visible {
   z-index: 1;
   padding: 0.5rem 0 1rem;
   background: var(--cream);
+}
+
+.features::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9rem;
+  height: 11rem;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 28%, transparent) 35%,
+    color-mix(in srgb, var(--cream) 72%, transparent) 68%,
+    var(--cream) 100%
+  );
 }
 
 .feature-band {
@@ -1286,7 +1337,12 @@ textarea {
   }
 
   .hero-media-fade {
-    height: min(46%, 22rem);
+    height: min(74%, 38rem);
+  }
+
+  .features::before {
+    top: -11rem;
+    height: 13rem;
   }
 
   .feature-band-shell {
