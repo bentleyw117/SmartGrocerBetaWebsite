@@ -391,11 +391,6 @@
 
           <div class="card waitlist-card">
             <form id="waitlist-form" novalidate>
-              <div class="field" data-field="email">
-                <label class="field-label" for="email">Email <span class="req">(required)</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
-                <p class="field-error" data-error></p>
-              </div>
               <div class="field-row">
                 <div class="field" data-field="first_name">
                   <label class="field-label" for="first_name"
@@ -422,6 +417,11 @@
                   />
                   <p class="field-error" data-error></p>
                 </div>
+              </div>
+              <div class="field" data-field="email">
+                <label class="field-label" for="email">Email <span class="req">(required)</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <p class="field-error" data-error></p>
               </div>
               <div class="field field--compact" data-field="zip">
                 <label class="field-label" for="zip">Zip <span class="req">(required)</span></label>
