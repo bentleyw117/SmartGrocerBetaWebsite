@@ -332,9 +332,9 @@ textarea:focus-visible {
 .hero-band {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   padding: 2.75rem 0 0;
-  margin-bottom: -4.5rem;
+  margin-bottom: -6rem;
   background: var(--cream);
   border-bottom: 0;
   border-radius: 0;
@@ -353,6 +353,25 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* Long dissolve so sky never meets cream on a hard cut. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 28%,
+    rgba(0, 0, 0, 0.75) 48%,
+    rgba(0, 0, 0, 0.4) 62%,
+    rgba(0, 0, 0, 0.14) 78%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 28%,
+    rgba(0, 0, 0, 0.75) 48%,
+    rgba(0, 0, 0, 0.4) 62%,
+    rgba(0, 0, 0, 0.14) 78%,
+    transparent 100%
+  );
 }
 
 .hero-media-veil {
@@ -373,29 +392,66 @@ textarea:focus-visible {
   left: 0;
   right: 0;
   bottom: 0;
-  height: min(42%, 18rem);
+  height: min(78%, 40rem);
+  z-index: 1;
   pointer-events: none;
   background:
     linear-gradient(
       180deg,
       transparent 0%,
-      color-mix(in srgb, var(--cream) 35%, transparent) 35%,
-      color-mix(in srgb, var(--cream) 78%, transparent) 68%,
+      color-mix(in srgb, var(--cream) 10%, transparent) 18%,
+      color-mix(in srgb, var(--cream) 28%, transparent) 36%,
+      color-mix(in srgb, var(--cream) 55%, transparent) 54%,
+      color-mix(in srgb, var(--cream) 82%, transparent) 72%,
+      color-mix(in srgb, var(--cream) 96%, transparent) 88%,
       var(--cream) 100%
     );
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-media-fade::after {
+  content: "";
+  position: absolute;
+  inset: 8% 0 -5rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 35%, transparent) 35%,
+    color-mix(in srgb, var(--cream) 78%, transparent) 70%,
+    var(--cream) 100%
+  );
+  filter: blur(36px);
+  opacity: 0.95;
+  transform: scaleY(1.25);
+  transform-origin: bottom center;
+}
+
+/* Extra cream wash that continues past the hero into features. */
+.hero-band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5rem;
+  height: min(52%, 26rem);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 20%, transparent) 30%,
+    color-mix(in srgb, var(--cream) 55%, transparent) 55%,
+    color-mix(in srgb, var(--cream) 88%, transparent) 78%,
+    var(--cream) 100%
+  );
 }
 
 .hero-band-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   gap: 2rem;
   text-align: center;
-  padding-bottom: 6.5rem;
+  padding-bottom: 7.5rem;
 }
 
 .hero-copy {
@@ -466,11 +522,33 @@ textarea:focus-visible {
 .features {
   position: relative;
   z-index: 1;
+  /* Fully transparent: body cream shows through; avoids a hard band edge over the hero wash. */
   padding: 0.5rem 0 1rem;
-  background: var(--cream);
+  background: transparent;
+}
+
+.features::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12rem;
+  height: 16rem;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cream) 12%, transparent) 22%,
+    color-mix(in srgb, var(--cream) 40%, transparent) 48%,
+    color-mix(in srgb, var(--cream) 78%, transparent) 75%,
+    var(--cream) 100%
+  );
 }
 
 .feature-band {
+  position: relative;
+  z-index: 1;
   padding: 2.5rem 0;
 }
 
@@ -1277,16 +1355,26 @@ textarea {
 
   .hero-band {
     padding: 3.5rem 0 0;
-    margin-bottom: -5.5rem;
+    margin-bottom: -7rem;
   }
 
   .hero-band-inner {
     gap: 2.25rem;
-    padding-bottom: 7.5rem;
+    padding-bottom: 8.5rem;
   }
 
   .hero-media-fade {
-    height: min(46%, 22rem);
+    height: min(82%, 44rem);
+  }
+
+  .hero-band::after {
+    bottom: -6rem;
+    height: min(56%, 30rem);
+  }
+
+  .features::before {
+    top: -14rem;
+    height: 18rem;
   }
 
   .feature-band-shell {
