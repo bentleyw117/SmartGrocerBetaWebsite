@@ -14,7 +14,7 @@ initWaitlist(document.querySelector("#waitlist-form"));
 document.querySelectorAll<HTMLAnchorElement>('a[href="#waitlist"]').forEach((link) => {
   link.addEventListener("click", () => {
     window.setTimeout(() => {
-      document.querySelector<HTMLInputElement>("#email")?.focus();
+      document.querySelector<HTMLInputElement>("#first_name")?.focus();
     }, 0);
   });
 });
