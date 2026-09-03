@@ -547,6 +547,8 @@ textarea:focus-visible {
 }
 
 .feature-band {
+  position: relative;
+  z-index: 1;
   padding: 2.5rem 0;
 }
 
